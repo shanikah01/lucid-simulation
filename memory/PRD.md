@@ -22,6 +22,12 @@ Single-page HTML/JS paper-trading battle pass for LucidFlex $50K. Surgical edits
 
 - How-it-works guide screen: auto-opens on first visit, can be reopened from the header "Guide" button. Covers the TradingView paper-trading workflow in units, the hard rules, levelling/payouts and a daily routine
 
+- Career tab "Backup, Strategy & Review Export" card:
+  - Strategy/Playbook notes, saved automatically
+  - Printable review report (readiness checklist, career and trade stats, breakdowns by market/emotion/discipline, failure reasons, strategy, run history, full trade log) that you can save as PDF
+  - All-trades CSV export
+  - Full JSON backup export and import (validated, with a confirmation step)
+
 ## Backlog
 - P1: Editable cap/rule settings panel
 - P2: Export/import career JSON backup
