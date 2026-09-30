@@ -1,0 +1,124 @@
+    <script>
+        const NEON_SURFACE = { 50: '#14141d', 100: '#1a1a24', 200: '#2a2540', 300: '#3a3456', 400: '#6b6b80', 500: '#a1a1b3', 600: '#a1a1b3', 700: '#c9c9d9', 800: '#e5e5f0', 900: '#f5f5fa' };
+        const NEON_CYAN = { 50: '#0b1a20', 100: '#0e2630', 200: '#12404d', 300: '#155e75', 400: '#22d3ee', 500: '#06b6d4', 600: '#22d3ee', 700: '#67e8f9', 800: '#a5f3fc', 900: '#cffafe' };
+        const NEON_PURPLE = { 50: '#17122a', 100: '#1f1638', 200: '#33235a', 300: '#7c3aed', 400: '#a855f7', 500: '#a855f7', 600: '#c084fc', 700: '#c084fc', 800: '#d8b4fe', 900: '#e9d5ff', 950: '#f5edff' };
+        const NEON_ROSE = { 50: '#1f0d14', 100: '#2e111c', 200: '#4c1a2c', 300: '#7f1d3a', 400: '#fb7185', 500: '#f43f5e', 600: '#f43f5e', 700: '#fb7185', 800: '#fda4af', 900: '#ffe4e6' };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Chakra Petch', 'sans-serif'],
+                        body: ['Chakra Petch', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        neon: { bg: '#0a0a0f', bg2: '#12121a', card: '#1a1a24', purple: '#a855f7', light: '#c084fc', deep: '#7c3aed', text: '#e5e5f0', muted: '#a1a1b3', success: '#22d3ee', danger: '#f43f5e' },
+                        stone: NEON_SURFACE,
+                        slate: { ...NEON_SURFACE, 900: '#0a0a0f' },
+                        emerald: NEON_CYAN, teal: NEON_CYAN, mint: NEON_CYAN, sage: NEON_CYAN,
+                        amber: NEON_PURPLE, butter: NEON_PURPLE, indigo: NEON_PURPLE, sky: NEON_PURPLE, peach: NEON_PURPLE,
+                        rose: NEON_ROSE,
+                        cream: '#1a1a24',
+                        warmgray: '#e5e5f0',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { background: #0a0a0f; }
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%) fixed;
+            color: #e5e5f0;
+        }
+        body::before {
+            content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image: linear-gradient(rgba(168,85,247,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        header, main, nav { position: relative; z-index: 1; }
+        ::selection { background: rgba(168,85,247,0.45); color: #fff; }
+
+        .neon-card {
+            background: #1a1a24;
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 1rem;
+            box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.8);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .neon-card:hover { border-color: rgba(168, 85, 247, 0.35); box-shadow: 0 0 26px -10px rgba(168, 85, 247, 0.45); }
+
+        .neon-btn {
+            border-radius: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, filter 0.15s ease;
+            box-shadow: 0 0 14px -6px rgba(168, 85, 247, 0.6);
+        }
+        .neon-btn:hover { box-shadow: 0 0 22px -4px rgba(168, 85, 247, 0.75); }
+        .neon-btn:active { transform: scale(0.97); }
+        .neon-btn-primary { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; }
+        .neon-btn-primary:hover { filter: brightness(1.12); }
+        .neon-btn-danger { background: #f43f5e; color: #fff; box-shadow: 0 0 16px -4px rgba(244, 63, 94, 0.6); }
+
+        .neon-badge {
+            border-radius: 9999px;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            box-shadow: 0 0 10px -4px rgba(168, 85, 247, 0.5);
+        }
+        .neon-stage { box-shadow: 0 0 16px -2px rgba(168, 85, 247, 0.7); }
+
+        .neon-tab {
+            border-radius: 0.75rem;
+            padding: 0.6rem 1.1rem;
+            font-weight: 700;
+            color: #a1a1b3;
+            border: 1px solid transparent;
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .neon-tab:hover { color: #e5e5f0; border-color: rgba(168, 85, 247, 0.25); }
+        .neon-tab.active {
+            background-color: rgba(124, 58, 237, 0.18);
+            color: #f5edff;
+            border-color: #a855f7;
+            box-shadow: 0 0 18px -2px rgba(168, 85, 247, 0.6), inset 0 0 12px rgba(168, 85, 247, 0.18);
+        }
+
+        .neon-backdrop { background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+        .bg-white { background-color: #1a1a24 !important; }
+        .bg-white\/80, .bg-white\/90, .bg-white\/50 { background-color: rgba(18, 18, 26, 0.85) !important; }
+        input, select, textarea { background-color: #12121a !important; color: #e5e5f0 !important; border-color: rgba(168, 85, 247, 0.22) !important; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #a855f7 !important; box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25); }
+        input[type="checkbox"] { accent-color: #a855f7; }
+
+        .reset-banner {
+            position: sticky; top: 84px; z-index: 30;
+            border: 1px solid #a855f7;
+            background: rgba(18, 18, 26, 0.92);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 0 22px -6px rgba(168, 85, 247, 0.65);
+        }
+        .pulse-dot { width: 10px; height: 10px; border-radius: 9999px; background: #a855f7; flex-shrink: 0; animation: pulse-glow 1.6s infinite ease-in-out; }
+
+        .glow-pulse { animation: pulse-glow 2s infinite ease-in-out; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.45); }
+            50% { box-shadow: 0 0 24px rgba(192, 132, 252, 0.9); }
+        }
+        .num { font-family: 'JetBrains Mono', monospace; }
+
+        :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+        html{scroll-padding-top:env(safe-area-inset-top,0px)}
+        header.sticky{top:env(safe-area-inset-top,0px)}
+        .stage-tag{font-size:10px;font-weight:700;border-radius:9999px;padding:2px 8px;display:inline-block}
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #12121a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #3a3456; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+    </style>

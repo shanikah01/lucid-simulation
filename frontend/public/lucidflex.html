@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <title>LucidFlex $50K Paper Trading Battle Pass</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        const NEON_SURFACE = { 50: '#14141d', 100: '#1a1a24', 200: '#2a2540', 300: '#3a3456', 400: '#6b6b80', 500: '#a1a1b3', 600: '#a1a1b3', 700: '#c9c9d9', 800: '#e5e5f0', 900: '#f5f5fa' };
+        const NEON_CYAN = { 50: '#0b1a20', 100: '#0e2630', 200: '#12404d', 300: '#155e75', 400: '#22d3ee', 500: '#06b6d4', 600: '#22d3ee', 700: '#67e8f9', 800: '#a5f3fc', 900: '#cffafe' };
+        const NEON_PURPLE = { 50: '#17122a', 100: '#1f1638', 200: '#33235a', 300: '#7c3aed', 400: '#a855f7', 500: '#a855f7', 600: '#c084fc', 700: '#c084fc', 800: '#d8b4fe', 900: '#e9d5ff', 950: '#f5edff' };
+        const NEON_ROSE = { 50: '#1f0d14', 100: '#2e111c', 200: '#4c1a2c', 300: '#7f1d3a', 400: '#fb7185', 500: '#f43f5e', 600: '#f43f5e', 700: '#fb7185', 800: '#fda4af', 900: '#ffe4e6' };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Chakra Petch', 'sans-serif'],
+                        body: ['Chakra Petch', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        neon: { bg: '#0a0a0f', bg2: '#12121a', card: '#1a1a24', purple: '#a855f7', light: '#c084fc', deep: '#7c3aed', text: '#e5e5f0', muted: '#a1a1b3', success: '#22d3ee', danger: '#f43f5e' },
+                        stone: NEON_SURFACE,
+                        slate: { ...NEON_SURFACE, 900: '#0a0a0f' },
+                        emerald: NEON_CYAN, teal: NEON_CYAN, mint: NEON_CYAN, sage: NEON_CYAN,
+                        amber: NEON_PURPLE, butter: NEON_PURPLE, indigo: NEON_PURPLE, sky: NEON_PURPLE, peach: NEON_PURPLE,
+                        rose: NEON_ROSE,
+                        cream: '#1a1a24',
+                        warmgray: '#e5e5f0',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { background: #0a0a0f; }
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            background: linear-gradient(180deg, #0a0a0f 0%, #12121a 100%) fixed;
+            color: #e5e5f0;
+        }
+        body::before {
+            content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+            background-image: linear-gradient(rgba(168,85,247,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        header, main, nav { position: relative; z-index: 1; }
+        ::selection { background: rgba(168,85,247,0.45); color: #fff; }
+
+        .neon-card {
+            background: #1a1a24;
+            border: 1px solid rgba(168, 85, 247, 0.15);
+            border-radius: 1rem;
+            box-shadow: 0 12px 32px -16px rgba(0, 0, 0, 0.8);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .neon-card:hover { border-color: rgba(168, 85, 247, 0.35); box-shadow: 0 0 26px -10px rgba(168, 85, 247, 0.45); }
+
+        .neon-btn {
+            border-radius: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, filter 0.15s ease;
+            box-shadow: 0 0 14px -6px rgba(168, 85, 247, 0.6);
+        }
+        .neon-btn:hover { box-shadow: 0 0 22px -4px rgba(168, 85, 247, 0.75); }
+        .neon-btn:active { transform: scale(0.97); }
+        .neon-btn-primary { background: linear-gradient(135deg, #7c3aed, #a855f7); color: #fff; }
+        .neon-btn-primary:hover { filter: brightness(1.12); }
+        .neon-btn-danger { background: #f43f5e; color: #fff; box-shadow: 0 0 16px -4px rgba(244, 63, 94, 0.6); }
+
+        .neon-badge {
+            border-radius: 9999px;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            box-shadow: 0 0 10px -4px rgba(168, 85, 247, 0.5);
+        }
+        .neon-stage { box-shadow: 0 0 16px -2px rgba(168, 85, 247, 0.7); }
+
+        .neon-tab {
+            border-radius: 0.75rem;
+            padding: 0.6rem 1.1rem;
+            font-weight: 700;
+            color: #a1a1b3;
+            border: 1px solid transparent;
+            transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .neon-tab:hover { color: #e5e5f0; border-color: rgba(168, 85, 247, 0.25); }
+        .neon-tab.active {
+            background-color: rgba(124, 58, 237, 0.18);
+            color: #f5edff;
+            border-color: #a855f7;
+            box-shadow: 0 0 18px -2px rgba(168, 85, 247, 0.6), inset 0 0 12px rgba(168, 85, 247, 0.18);
+        }
+
+        .neon-backdrop { background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
+        .bg-white { background-color: #1a1a24 !important; }
+        .bg-white\/80, .bg-white\/90, .bg-white\/50 { background-color: rgba(18, 18, 26, 0.85) !important; }
+        input, select, textarea { background-color: #12121a !important; color: #e5e5f0 !important; border-color: rgba(168, 85, 247, 0.22) !important; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #a855f7 !important; box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.25); }
+        input[type="checkbox"] { accent-color: #a855f7; }
+
+        .reset-banner {
+            position: sticky; top: 84px; z-index: 30;
+            border: 1px solid #a855f7;
+            background: rgba(18, 18, 26, 0.92);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 0 22px -6px rgba(168, 85, 247, 0.65);
+        }
+        .pulse-dot { width: 10px; height: 10px; border-radius: 9999px; background: #a855f7; flex-shrink: 0; animation: pulse-glow 1.6s infinite ease-in-out; }
+
+        .glow-pulse { animation: pulse-glow 2s infinite ease-in-out; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.45); }
+            50% { box-shadow: 0 0 24px rgba(192, 132, 252, 0.9); }
+        }
+        .num { font-family: 'JetBrains Mono', monospace; }
+
+        :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+        html{scroll-padding-top:env(safe-area-inset-top,0px)}
+        header.sticky{top:env(safe-area-inset-top,0px)}
+        .stage-tag{font-size:10px;font-weight:700;border-radius:9999px;padding:2px 8px;display:inline-block}
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #12121a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #3a3456; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pb-12">
+
+    <!-- Top Navigation Header -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-stone-200 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <!-- Brand Title -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-mint-200 to-butter-200 flex items-center justify-center text-xl shadow-sm border border-mint-300">
+                    🍃
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-slate-800 flex items-center gap-2">
+                        LucidFlex <span class="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">$50K Pass</span>
+                        <span class="text-xs bg-butter-100 text-amber-800 px-2 py-0.5 rounded-full border border-butter-200 font-semibold" id="headerDllBadge" data-testid="header-dll-badge">DLL $1,000</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 font-medium">Hardened Paper Trading Battle Pass &amp; Rule Companion</p>
+                </div>
+            </div>
+
+            <!-- Top Status Badges & Quick Settings -->
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <!-- Run Badge -->
+                <div class="neon-badge bg-amber-50 text-amber-800 border border-amber-200">
+                    <span>☕ Run #<span id="headerRunNum">1</span></span>
+                </div>
+
+                <!-- Stage Badge -->
+                <div id="headerStageBadge" data-testid="header-stage-badge" class="neon-badge neon-stage bg-emerald-100 text-emerald-800 border border-emerald-300">
+                    <span class="" aria-hidden="true">🧭</span>
+                    <span id="headerStageText">Stage 1: Evaluation</span>
+                </div>
+
+                <!-- Beginner Mode Toggle -->
+                <button onclick="toggleBeginnerMode()" id="beginnerToggleBtn" class="neon-badge bg-indigo-50 text-indigo-700 border border-indigo-200 hover:bg-indigo-100 cursor-pointer transition">
+                    <span>🌱 Hints: <span id="beginnerToggleText" class="font-bold">ON</span></span>
+                </button>
+
+                <!-- Exchange Rate Setting -->
+                <button onclick="openExchangeModal()" class="neon-badge bg-stone-100 text-stone-700 border border-stone-200 hover:bg-stone-200 cursor-pointer transition">
+                    <span class="text-amber-500" aria-hidden="true">🪙</span>
+                    <span>1 USD = $<span id="headerFxRate">1.70</span> NZD</span>
+                </button>
+
+                <!-- Reset Run Button -->
+                <button onclick="confirmResetRun()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-xl font-bold flex items-center gap-1.5 transition">
+                    <span class="text-xs" aria-hidden="true">↺</span>
+                    <span>Reset Run</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tab Navigation Bar -->
+    <div class="max-w-7xl mx-auto w-full px-4 pt-6">
+        <nav class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <button onclick="switchTab('dashboard')" id="tab-dashboard" class="neon-tab active flex items-center gap-2 whitespace-nowrap">
+                <span>📊</span> Dashboard
+            </button>
+            <button onclick="switchTab('journal')" id="tab-journal" class="neon-tab flex items-center gap-2 whitespace-nowrap">
+                <span>📝</span> Trade Journal
+            </button>
+            <button onclick="switchTab('calculator')" id="tab-calculator" class="neon-tab flex items-center gap-2 whitespace-nowrap">
+                <span>🧮</span> Position Calculator
+            </button>
+            <button onclick="switchTab('dictionary')" id="tab-dictionary" class="neon-tab flex items-center gap-2 whitespace-nowrap">
+                <span>📚</span> Beginner Dictionary
+            </button>
+            <button onclick="switchTab('rules')" id="tab-rules" class="neon-tab flex items-center gap-2 whitespace-nowrap">
+                <span>📜</span> Rules & Checklist
+            </button>
+            <button onclick="switchTab('career')" id="tab-career" class="neon-tab flex items-center gap-2 whitespace-nowrap">
+                <span>🏆</span> Career & Badges
+            </button>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto w-full px-4 mt-4 flex-grow">
+
+        <!-- TAB 1: DASHBOARD -->
+        <section id="sec-dashboard" class="space-y-6">
+            <div class="reset-banner rounded-xl px-4 py-3 flex items-center justify-between gap-3" data-testid="reset-warning-banner-dashboard">
+                <div class="flex items-center gap-3 text-sm"><span class="pulse-dot"></span><span><strong class="text-amber-700 tracking-wider">HARD RULES ARMED.</strong> Break any hard rule &rarr; account resets to Stage 1. All stats archive as a failed run.</span></div>
+                <button onclick="dismissBanner()" data-testid="dismiss-banner-dashboard" class="text-xs font-bold text-slate-500 hover:text-slate-800 px-3 py-1 rounded-lg border border-stone-200 flex-shrink-0">Dismiss</button>
+            </div>
+
+            <!-- "WHAT DO I DO NEXT?" Smart Guidance Box -->
+            <div class="neon-card p-5 bg-gradient-to-r from-mint-50 via-butter-50 to-amber-50/30 border-2 border-mint-200 relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex items-start gap-3">
+                        <div class="text-3xl p-2 bg-white rounded-2xl shadow-sm border border-mint-200">
+                            🦊
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h2 class="text-lg font-bold text-slate-800">WHAT DO I DO NEXT?</h2>
+                                <span class="text-xs bg-mint-200 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Lucid Guide Bot</span>
+                            </div>
+                            <p id="guidanceText" class="text-sm text-slate-700 mt-1 font-medium leading-relaxed">
+                                Loading dynamic guidance...
+                            </p>
+                        </div>
+                    </div>
+                    <div id="guidanceActionArea" class="flex-shrink-0 flex gap-2">
+                        <!-- Dynamic Buttons rendered here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metric Cards Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Balance Card -->
+                <div class="neon-card p-4 relative">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-bold">
+                        <span>ACCOUNT BALANCE</span>
+                        <span class="text-emerald-600">💵</span>
+                    </div>
+                    <div class="text-2xl font-bold text-slate-800 mt-1" id="dashBalance">$50,000.00</div>
+                    <div class="text-xs mt-1 font-semibold flex items-center gap-1" id="dashPnL">
+                        <span class="text-slate-500">P&L:</span> <span class="text-slate-600">$0.00</span>
+                    </div>
+                </div>
+
+                <!-- Distance to Target Card -->
+                <div class="neon-card p-4 relative">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-bold">
+                        <span id="targetCardTitle">TARGET ($53,000)</span>
+                        <span>⭐</span>
+                    </div>
+                    <div class="text-2xl font-bold text-amber-600 mt-1" id="dashTargetDist">$3,000.00</div>
+                    <div class="text-xs text-slate-500 mt-1 font-medium" id="dashTargetSub text">Needed to pass Eval</div>
+                </div>
+
+                <!-- Safety Limit Card -->
+                <div class="neon-card p-4 relative">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-bold">
+                        <span>SAFETY LIMIT (EOD)</span>
+                        <span class="text-rose-500">🛡️</span>
+                    </div>
+                    <div class="text-2xl font-bold text-rose-600 mt-1" id="dashDrawdownThreshold">$48,000.00</div>
+                    <div class="text-xs text-slate-500 mt-1 font-medium flex justify-between">
+                        <span>Buffer Remaining:</span>
+                        <span id="dashBufferRemaining" class="font-bold text-emerald-700">$2,000.00</span>
+                    </div>
+                </div>
+
+                <!-- Allowed Contracts Card -->
+                <div class="neon-card p-4 relative">
+                    <div class="flex items-center justify-between text-xs text-slate-500 font-bold">
+                        <span>MAX CONTRACT SIZE</span>
+                        <span class="text-indigo-500">📊</span>
+                    </div>
+                    <div class="text-2xl font-bold text-indigo-700 mt-1" id="dashAllowedContracts">20 Micros</div>
+                    <div class="text-xs text-slate-500 mt-1 font-medium" id="dashContractSub">Or max 2 Minis</div>
+                </div>
+            </div>
+
+            <!-- Beginner Mode Explanation Card (Shown when Beginner Mode is ON) -->
+            <div id="beginnerModeCard" class="neon-card p-4 bg-butter-50/80 border-butter-200 text-sm space-y-2">
+                <div class="flex items-center gap-2 font-bold text-amber-900">
+                    <span>🌱 Beginner Cheat Sheet for LucidFlex $50K</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-700">
+                    <div class="bg-white/80 p-2.5 rounded-xl border border-butter-200">
+                        <span class="font-bold text-amber-800">What is the Daily Loss Limit?</span>
+                        <p class="mt-0.5">This hardened tracker enforces a <strong>$1,000 Daily Loss Limit</strong>. Lose that much in one trading day and the run is blown and resets to Stage 1.</p>
+                    </div>
+                    <div class="bg-white/80 p-2.5 rounded-xl border border-butter-200">
+                        <span class="font-bold text-amber-800">What is EOD Trailing Drawdown?</span>
+                        <p class="mt-0.5">Your safe limit is always $2,000 below your highest ending account balance. Once your balance reaches $52,100, the floor locks permanently at $50,100!</p>
+                    </div>
+                    <div class="bg-white/80 p-2.5 rounded-xl border border-butter-200">
+                        <span class="font-bold text-amber-800">What is the 50% Consistency Rule?</span>
+                        <p class="mt-0.5">Your single biggest winning day cannot make up more than 50% of your total net profit when passing evaluation. Keeping wins steady is key!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roadmap & Status Tracker Block -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Left 2 Columns: Battle Pass Roadmap & Evaluation Rules -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Battle Pass Stage Roadmap -->
+                    <div class="neon-card p-5">
+                        <h3 class="font-bold text-slate-800 mb-4 flex items-center justify-between">
+                            <span class="flex items-center gap-2">🎮 Battle Pass Stage Progression</span>
+                            <span class="text-xs font-semibold text-slate-500">Stage <span id="roadmapStageNum">1</span> of 4</span>
+                        </h3>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <!-- Stage 1 Pill -->
+                            <div id="roadStage1" class="p-3 rounded-2xl border text-center relative transition-all">
+                                <div class="text-xs text-slate-500 font-bold">STAGE 1</div>
+                                <div class="font-bold text-sm text-slate-800 mt-0.5">Evaluation</div>
+                                <div class="text-[11px] text-slate-500 mt-1">$53K Target</div>
+                                <div id="roadBadge1" class="mt-2 inline-block text-[10px] px-2 py-0.5 rounded-full font-bold">In Progress</div>
+                            </div>
+
+                            <!-- Stage 2 Pill -->
+                            <div id="roadStage2" class="p-3 rounded-2xl border text-center relative transition-all">
+                                <div class="text-xs text-slate-500 font-bold">STAGE 2</div>
+                                <div class="font-bold text-sm text-slate-800 mt-0.5">Funded 1-4</div>
+                                <div class="text-[11px] text-slate-500 mt-1">5 Green Days Each</div>
+                                <div id="roadBadge2" class="mt-2 inline-block text-[10px] px-2 py-0.5 rounded-full font-bold">Locked</div>
+                            </div>
+
+                            <!-- Stage 3 Pill -->
+                            <div id="roadStage3" class="p-3 rounded-2xl border text-center relative transition-all">
+                                <div class="text-xs text-slate-500 font-bold">STAGE 3</div>
+                                <div class="font-bold text-sm text-slate-800 mt-0.5">5th Payout</div>
+                                <div class="text-[11px] text-slate-500 mt-1">Final Pass Payout</div>
+                                <div id="roadBadge3" class="mt-2 inline-block text-[10px] px-2 py-0.5 rounded-full font-bold">Locked</div>
+                            </div>
+
+                            <!-- Stage 4 Pill -->
+                            <div id="roadStage4" class="p-3 rounded-2xl border text-center relative transition-all">
+                                <div class="text-xs text-slate-500 font-bold">STAGE 4</div>
+                                <div class="font-bold text-sm text-slate-800 mt-0.5">Live Review 🏆</div>
+                                <div class="text-[11px] text-slate-500 mt-1">Battle Pass Won</div>
+                                <div id="roadBadge4" class="mt-2 inline-block text-[10px] px-2 py-0.5 rounded-full font-bold">Locked</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rule Requirements Tracker Cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        
+                        <!-- 5 Green Days Tracker -->
+                        <div class="neon-card p-4 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-800 flex items-center gap-1.5 text-sm">
+                                    <span>🍃 5 Green Days Progress</span>
+                                </span>
+                                <span class="text-xs font-bold text-emerald-700" id="greenDaysRatio">0 / 5</span>
+                            </div>
+                            <p class="text-xs text-slate-500">Qualifying Green Day = <strong class="text-slate-700">+$150 USD</strong> minimum net profit.</p>
+                            <!-- Visual Green Day Dots -->
+                            <div id="greenDayDots" class="flex items-center justify-between gap-1 pt-1">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- 50% Consistency Rule Tracker -->
+                        <div class="neon-card p-4 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="font-bold text-slate-800 flex items-center gap-1.5 text-sm">
+                                    <span>🎯 50% Consistency Rule</span>
+                                </span>
+                                <span class="text-xs font-bold" id="consistencyRatio">0%</span>
+                            </div>
+                            <!-- Consistency Progress Bar -->
+                            <div class="w-full bg-stone-100 rounded-full h-3 overflow-hidden border border-stone-200">
+                                <div id="consistencyBar" class="bg-emerald-400 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs text-slate-600">
+                                <span id="consistencyStatusText">Max winning day / Total profit</span>
+                                <span id="consistencyPassBadge" class="font-bold text-rose-600">Need Profit</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: NZ Timezone Clock & Quick Actions -->
+                <div class="space-y-6">
+
+                    <!-- New Zealand Market Close Clock -->
+                    <div class="neon-card p-5 bg-gradient-to-br from-sky-50 via-stone-100 to-indigo-50/30 border-sky-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="font-bold text-slate-800 flex items-center gap-2 text-sm">
+                                <span>🇳🇿 NZ Trading Cutoff Clock</span>
+                            </span>
+                            <span class="text-[10px] bg-sky-100 text-sky-800 font-bold px-2 py-0.5 rounded-full">4:45 PM ET</span>
+                        </div>
+
+                        <div class="text-center py-2 bg-white/80 rounded-2xl border border-sky-100 shadow-sm space-y-1">
+                            <div class="text-xs text-slate-500 font-bold">NEXT MARKET CLOSE (NZ LOCAL TIME):</div>
+                            <div id="nzCutoffTime" class="text-lg font-bold text-indigo-900">Calculating...</div>
+                            <div id="nzCountdownText" class="text-xs font-bold text-emerald-600">-- h -- m remaining</div>
+                        </div>
+
+                        <div class="text-xs text-slate-600 mt-3 space-y-1 bg-white/50 p-2.5 rounded-xl border border-sky-100">
+                            <p class="flex items-center gap-1 font-semibold text-slate-700">
+                                <span class="text-amber-500" aria-hidden="true">🕒</span> Why does this cutoff matter?
+                            </p>
+                            <p class="text-[11px] leading-relaxed">
+                                Lucid requires all paper trades to be closed prior to 4:45 PM Eastern US time daily to avoid position holds over market maintenance!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Action Buttons -->
+                    <div class="neon-card p-5 space-y-3">
+                        <h4 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                            <span>✨ Quick Actions</span>
+                        </h4>
+                        
+                        <button onclick="openLogTradeModal()" class="w-full neon-btn neon-btn-primary py-3 px-4 shadow-sm flex items-center justify-center gap-2">
+                            <span class="text-sm" aria-hidden="true">+</span>
+                            <span>Log New Trade</span>
+                        </button>
+
+                        <button onclick="openPayoutModal()" id="requestPayoutBtn" class="w-full neon-btn bg-amber-200 hover:bg-amber-300 text-amber-900 py-2.5 px-4 shadow-sm flex items-center justify-center gap-2 text-sm">
+                            <span class="" aria-hidden="true">💰</span>
+                            <span>Request Payout</span>
+                        </button>
+
+                        <button onclick="switchTab('calculator')" class="w-full neon-btn bg-sky-100 hover:bg-sky-200 text-sky-900 py-2.5 px-4 shadow-sm flex items-center justify-center gap-2 text-sm">
+                            <span class="" aria-hidden="true">🧮</span>
+                            <span>Calculate Position Size</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TAB 2: TRADE JOURNAL -->
+        <section id="sec-journal" class="space-y-6 hidden">
+            
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <span>📝 Trade Log & Journal</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 font-medium">Record paper trades, track emotional discipline, and calculate exact P&L.</p>
+                </div>
+
+                <button onclick="openLogTradeModal()" class="neon-btn neon-btn-primary py-2.5 px-4 shadow-sm flex items-center gap-2">
+                    <span class="" aria-hidden="true">+</span>
+                    <span>Log Trade</span>
+                </button>
+            </div>
+
+            <!-- Journal Stats Summary Strip -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="neon-card p-3.5 text-center">
+                    <div class="text-xs text-slate-500 font-bold">TOTAL TRADES</div>
+                    <div id="jStatTotal" class="text-xl font-bold text-slate-800 mt-1">0</div>
+                </div>
+                <div class="neon-card p-3.5 text-center">
+                    <div class="text-xs text-slate-500 font-bold">WIN RATE</div>
+                    <div id="jStatWinRate" class="text-xl font-bold text-emerald-600 mt-1">0%</div>
+                </div>
+                <div class="neon-card p-3.5 text-center">
+                    <div class="text-xs text-slate-500 font-bold">TOTAL NET P&L</div>
+                    <div id="jStatNetPnL" class="text-xl font-bold text-slate-800 mt-1">$0.00</div>
+                </div>
+                <div class="neon-card p-3.5 text-center">
+                    <div class="text-xs text-slate-500 font-bold">PROFIT FACTOR</div>
+                    <div id="jStatProfitFactor" class="text-xl font-bold text-indigo-600 mt-1">0.00</div>
+                </div>
+            </div>
+
+            <!-- Payout History -->
+            <div id="payoutHistoryCard" class="neon-card overflow-hidden hidden">
+                <div class="p-4 bg-amber-50 border-b border-amber-100 flex items-center justify-between">
+                    <span class="font-bold text-amber-900 text-sm">💰 Payout History (Current Run)</span>
+                    <span id="payoutCountBadge" class="text-xs bg-amber-200 text-amber-900 px-2 py-0.5 rounded-full font-bold">0 / 5</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-stone-100/70 text-slate-500 font-bold border-b border-stone-200">
+                            <tr><th class="p-3">DATE</th><th class="p-3">GROSS</th><th class="p-3">YOU GET (USD)</th><th class="p-3">YOU GET (NZD)</th><th class="p-3">STATUS</th><th class="p-3 text-right">ACTION</th></tr>
+                        </thead>
+                        <tbody id="payoutTableBody" class="divide-y divide-stone-100 font-medium"></tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Trade Table -->
+            <div class="neon-card overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-200 flex items-center justify-between">
+                    <span class="font-bold text-slate-700 text-sm">Trade Log History (Current Run)</span>
+                    <span id="journalCountBadge" class="text-xs bg-stone-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">0 Trades</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-stone-100/70 text-slate-500 font-bold border-b border-stone-200">
+                            <tr>
+                                <th class="p-3">DATE</th>
+                                <th class="p-3">SYMBOL</th>
+                                <th class="p-3">TYPE</th>
+                                <th class="p-3">SIZE</th>
+                                <th class="p-3">NOTES</th>
+                                <th class="p-3">NET P&L ($)</th>
+                                <th class="p-3">EMOTION</th>
+                                <th class="p-3">RULES?</th>
+                                <th class="p-3">STATUS</th>
+                                <th class="p-3 text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="journalTableBody" class="divide-y divide-stone-100 font-medium">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty state placeholder -->
+                <div id="emptyJournalState" class="p-12 text-center space-y-2">
+                    <div class="text-4xl">☕</div>
+                    <p class="font-bold text-slate-700">No trades logged in this run yet!</p>
+                    <p class="text-xs text-slate-500">Click "Log Trade" above to add your first simulated trade.</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 3: POSITION CALCULATOR -->
+        <section id="sec-calculator" class="space-y-6 hidden">
+            
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <span>🧮 Safe Position Size Calculator</span>
+                </h2>
+                <p class="text-xs text-slate-500 font-medium">Enter your trade stop loss to calculate exact safe contract counts matching your stage limits.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Calculator Form Inputs -->
+                <div class="neon-card p-5 space-y-4">
+                    <h3 class="font-bold text-slate-800 text-sm pb-2 border-b border-stone-100">Trade Parameters</h3>
+
+                    <!-- Instrument Selector -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Futures Instrument</label>
+                        <select id="calcSymbol" data-testid="calc-symbol-select" onchange="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-sm text-slate-800">
+                        </select>
+                    </div>
+
+                    <!-- Risk Amount -->
+                    <div>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-xs font-bold text-slate-600">Planned USD Risk ($)</label>
+                            <span class="text-[11px] text-amber-700 font-semibold">Recommended max $150-$300</span>
+                        </div>
+                        <input type="number" id="calcRiskUsd" value="200" min="10" step="10" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
+                    </div>
+
+                    <!-- Entry Price & Stop Loss -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Entry Price</label>
+                            <input type="number" id="calcEntryPrice" value="5000.00" step="0.25" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Stop Loss Price</label>
+                            <input type="number" id="calcStopPrice" value="4990.00" step="0.25" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Current Account Stage Cap Reminder -->
+                    <div class="p-3 bg-indigo-50/70 border border-indigo-100 rounded-xl text-xs space-y-1">
+                        <div class="font-bold text-indigo-900 flex justify-between">
+                            <span>Current Account Cap:</span>
+                            <span id="calcCurrentCapBadge" data-testid="calc-cap-badge" class="text-indigo-700">20 Micros / 2 Minis</span>
+                        </div>
+                        <p class="text-slate-600 text-[11px]">The calculator will cap contract counts so you never violate Lucid limits!</p>
+                        <p id="calcCapUnits" data-testid="calc-cap-units" class="text-[11px] font-semibold text-indigo-700"></p>
+                    </div>
+                </div>
+
+                <!-- Calculator Outputs Box -->
+                <div class="neon-card p-5 bg-gradient-to-br from-mint-50 via-stone-100 to-butter-50 border-mint-200 space-y-5">
+                    <h3 class="font-bold text-slate-800 text-sm pb-2 border-b border-mint-200 flex items-center justify-between">
+                        <span>📊 Calculation Results</span>
+                        <span class="text-xs font-normal text-emerald-800 bg-mint-200 px-2 py-0.5 rounded-full font-bold">Auto Updated</span>
+                    </h3>
+
+                    <!-- Safe Micro Count Display -->
+                    <div class="text-center p-4 bg-white/90 rounded-2xl border border-mint-200 shadow-sm space-y-1">
+                        <div class="text-xs text-slate-500 font-bold">RECOMMENDED POSITION SIZE</div>
+                        <div class="text-3xl font-extrabold text-emerald-700 flex items-center justify-center gap-2">
+                            <span id="calcResultMicros" data-testid="calc-result-micros">4</span>
+                            <span class="text-sm font-bold text-slate-600">Micros</span>
+                        </div>
+                        <div class="text-xs font-bold text-indigo-700 mt-1" id="calcResultMinis">Or 0 Full Minis</div>
+                        <div id="calcResultUnits" data-testid="calc-result-units" class="text-[11px] text-slate-500"></div>
+                    </div>
+
+                    <!-- Calculation Details -->
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between py-1.5 border-b border-stone-100">
+                            <span class="text-slate-500">Price Stop Loss Distance:</span>
+                            <span id="calcResultPoints" class="font-bold text-slate-800">10.00 pts (40 ticks)</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-stone-100">
+                            <span class="text-slate-500">Risk Per 1 Micro Contract:</span>
+                            <span id="calcResultRiskPerMicro" class="font-bold text-slate-800">$50.00 USD</span>
+                        </div>
+                        <div class="flex justify-between py-1.5 border-b border-stone-100">
+                            <span class="text-slate-500">Total Actual Risk Amount:</span>
+                            <span id="calcResultTotalRisk" class="font-bold text-rose-600">$200.00 USD</span>
+                        </div>
+                    </div>
+
+                    <!-- Plain English Recommendation -->
+                    <div id="calcRecommendationBox" class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed font-medium">
+                        💡 Plain English Advice: Trading 4 Micro contracts on this setup will keep your loss right at $200 USD if stopped out!
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TAB 4: BEGINNER DICTIONARY -->
+        <section id="sec-dictionary" class="space-y-6 hidden">
+            
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <span>📚 Beginner Trading Dictionary</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 font-medium">Simple, no-fluff explanations of every trading term you need to master.</p>
+                </div>
+
+                <!-- Search Input -->
+                <div class="relative w-full sm:w-64">
+                    <span class="absolute left-3 top-3 text-slate-400 text-xs" aria-hidden="true">🔍</span>
+                    <input type="text" id="dictSearch" data-testid="dict-search-input" oninput="filterDictionary()" placeholder="Search terms (e.g., EOD, Tick)..." class="w-full pl-8 pr-3 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-slate-800 bg-white">
+                </div>
+            </div>
+
+            <!-- Dictionary Category Filter Pills -->
+            <div id="dictCatPills" class="flex gap-2 overflow-x-auto pb-1 text-xs">
+            </div>
+
+            <!-- Dictionary Grid Container -->
+            <div id="dictionaryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Rendered dynamically -->
+            </div>
+
+        </section>
+
+        <!-- TAB 5: PERSONAL RULES -->
+        <section id="sec-rules" class="space-y-6 hidden">
+            <div class="reset-banner rounded-xl px-4 py-3 flex items-center justify-between gap-3" data-testid="reset-warning-banner-rules">
+                <div class="flex items-center gap-3 text-sm"><span class="pulse-dot"></span><span><strong class="text-amber-700 tracking-wider">HARD RULES ARMED.</strong> Break any hard rule &rarr; account resets to Stage 1. All stats archive as a failed run.</span></div>
+                <button onclick="dismissBanner()" data-testid="dismiss-banner-rules" class="text-xs font-bold text-slate-500 hover:text-slate-800 px-3 py-1 rounded-lg border border-stone-200 flex-shrink-0">Dismiss</button>
+            </div>
+            <div class="neon-card p-5 space-y-3" data-testid="hard-rules-card">
+                <h3 class="font-bold text-slate-800 text-sm tracking-wider">HARD RULES (AUTO-ENFORCED)</h3>
+                <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-5">
+                    <li>EOD trailing drawdown: balance at or below the safety floor.</li>
+                    <li>Daily loss limit: losing <span id="rulesDllText">$1,000</span> or more in one trading day.</li>
+                    <li>Consistency: reaching the $53K target while your best day is over 50% of profit.</li>
+                    <li>Position size: any trade over the current stage cap (no grace, 1 micro over = blown).</li>
+                </ul>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-[11px]">
+                    <div class="p-2 rounded-lg border border-stone-200"><div class="text-slate-500">Evaluation</div><div class="font-bold text-amber-700">40 micros / 4 minis</div></div>
+                    <div class="p-2 rounded-lg border border-stone-200"><div class="text-slate-500">Funded $0&ndash;$999</div><div class="font-bold text-amber-700">20 micros / 2 minis</div></div>
+                    <div class="p-2 rounded-lg border border-stone-200"><div class="text-slate-500">Funded $1,000&ndash;$1,999</div><div class="font-bold text-amber-700">30 micros / 3 minis</div></div>
+                    <div class="p-2 rounded-lg border border-stone-200"><div class="text-slate-500">Funded $2,000+</div><div class="font-bold text-amber-700">40 micros / 4 minis</div></div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <span>📜 Trading Rules & Discipline Checklist</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 font-medium">Keep yourself accountable with official Lucid rules and custom personal guidelines.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+                <!-- Left 2 Columns: Rule List -->
+                <div class="lg:col-span-2 space-y-4">
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-slate-700 text-sm">Active Rules List</span>
+                        <div class="flex gap-2 text-xs font-bold">
+                            <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-200">🩷 Lucid Official</span>
+                            <span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 border border-indigo-200">🎀 Personal Discipline</span>
+                        </div>
+                    </div>
+
+                    <div id="rulesContainer" class="space-y-3">
+                        <!-- Rendered dynamically -->
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Add Custom Rule & Checklist Tool -->
+                <div class="space-y-6">
+
+                    <!-- Add Personal Rule Card -->
+                    <div class="neon-card p-5 space-y-3">
+                        <h3 class="font-bold text-slate-800 text-sm">Add New Personal Rule</h3>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Rule Description</label>
+                            <input type="text" id="newRuleText" placeholder="e.g., Max 3 trades per day..." class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-semibold text-slate-800 bg-white">
+                        </div>
+                        <button onclick="addPersonalRule()" class="w-full neon-btn bg-indigo-100 hover:bg-indigo-200 text-indigo-900 py-2.5 px-4 shadow-sm text-xs font-bold flex items-center justify-center gap-2">
+                            <span class="" aria-hidden="true">+</span>
+                            <span>Save Personal Rule</span>
+                        </button>
+                    </div>
+
+                    <!-- Pre-Trade Routine Checklist -->
+                    <div class="neon-card p-5 bg-gradient-to-br from-butter-50 to-amber-50/40 border-butter-200 space-y-3">
+                        <h3 class="font-bold text-amber-900 text-sm flex items-center gap-2">
+                            <span>☕ Pre-Trade Mindset Checklist</span>
+                        </h3>
+                        <p class="text-xs text-amber-800">Check these off before entering any paper trade!</p>
+
+                        <div class="space-y-2 text-xs font-medium text-slate-700">
+                            <label class="flex items-center gap-2 bg-white/80 p-2 rounded-xl border border-butter-200 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 accent-emerald-500 rounded">
+                                <span>I used the Position Size Calculator to check my stop loss.</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-white/80 p-2 rounded-xl border border-butter-200 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 accent-emerald-500 rounded">
+                                <span>I am not trading within 10 mins of major red-folder news.</span>
+                            </label>
+                            <label class="flex items-center gap-2 bg-white/80 p-2 rounded-xl border border-butter-200 cursor-pointer">
+                                <input type="checkbox" class="w-4 h-4 accent-emerald-500 rounded">
+                                <span>I am calm and ready to log the trade emotion accurately.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TAB 6: CAREER & BADGES -->
+        <section id="sec-career" class="space-y-6 hidden">
+            
+            <div>
+                <h2 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                    <span>🏆 Career Stats & Achievement Badges</span>
+                </h2>
+                <p class="text-xs text-slate-500 font-medium">All completed and past runs are saved here permanently!</p>
+            </div>
+
+            <!-- Aggregate Lifetime Career Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="neon-card p-4 text-center">
+                    <div class="text-xs text-slate-500 font-bold">TOTAL ATTEMPTED RUNS</div>
+                    <div id="cStatTotalRuns" data-testid="career-total-runs" class="text-2xl font-bold text-slate-800 mt-1">1</div>
+                </div>
+                <div class="neon-card p-4 text-center">
+                    <div class="text-xs text-slate-500 font-bold">LIFETIME PAYOUTS (USD)</div>
+                    <div id="cStatTotalUsd" class="text-2xl font-bold text-emerald-600 mt-1">$0.00</div>
+                </div>
+                <div class="neon-card p-4 text-center">
+                    <div class="text-xs text-slate-500 font-bold">ESTIMATED PAYOUTS (NZD)</div>
+                    <div id="cStatTotalNzd" class="text-2xl font-bold text-teal-700 mt-1">$0.00</div>
+                </div>
+                <div class="neon-card p-4 text-center">
+                    <div class="text-xs text-slate-500 font-bold">BEST STAGE REACHED</div>
+                    <div id="cStatBestStage" data-testid="career-best-stage" class="text-2xl font-bold text-indigo-700 mt-1">Evaluation</div>
+                </div>
+                <div class="neon-card p-4 text-center">
+                    <div class="text-xs text-slate-500 font-bold">LIFETIME WIN RATE</div>
+                    <div id="cStatWinRate" data-testid="career-win-rate" class="text-2xl font-bold text-emerald-600 mt-1">&mdash;</div>
+                    <div id="cStatWinSub" data-testid="career-win-sub" class="text-[10px] text-slate-500 mt-0.5">0 passed / 0 failed / 0 reset</div>
+                </div>
+            </div>
+
+            <!-- Achievement Badges Grid -->
+            <div class="neon-card p-5 space-y-4">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center justify-between">
+                    <span>⭐ Achievement Badges</span>
+                    <span id="badgeUnlockedCount" class="text-xs bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded-full">0 / 8 Unlocked</span>
+                </h3>
+
+                <div id="badgesGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- Rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- Past Career History Table -->
+            <div class="neon-card overflow-hidden">
+                <div class="p-4 bg-stone-50 border-b border-stone-200">
+                    <span class="font-bold text-slate-700 text-sm">Permanent Career History Log</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-700">
+                        <thead class="bg-stone-100/70 text-slate-500 font-bold border-b border-stone-200">
+                            <tr>
+                                <th class="p-3">RUN #</th>
+                                <th class="p-3">OUTCOME</th>
+                                <th class="p-3">FINAL STAGE</th>
+                                <th class="p-3">FINAL BALANCE</th>
+                                <th class="p-3">PAYOUTS (USD)</th>
+                                <th class="p-3">PAYOUTS (NZD)</th>
+                                <th class="p-3">DATE COMPLETED</th>
+                                <th class="p-3 text-right">ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="careerTableBody" class="divide-y divide-stone-100 font-medium">
+                            <!-- Rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="emptyCareerState" class="p-8 text-center text-xs text-slate-500">
+                    No past runs completed yet. When you complete or reset a run, its record will be permanently saved here!
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL 1: LOG TRADE MODAL -->
+    <div id="modalLogTrade" class="fixed inset-0 neon-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="neon-card bg-white w-full max-w-lg p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                    <span>📝 Log Paper Trade</span>
+                </h3>
+                <button onclick="closeLogTradeModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">&times;</button>
+            </div>
+
+            <div class="space-y-3">
+                <!-- Trade Date -->
+                    <div>
+                        <label for="tradeDate" class="block text-xs font-bold text-slate-600 mb-1">Trade Date <span class="font-medium text-slate-400">(change it to backdate)</span></label>
+                        <input type="date" id="tradeDate" data-testid="trade-date-input" oninput="updateTradeHint()" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800">
+                        <p id="tradeDateHint" class="text-[11px] text-slate-500 mt-1 font-medium"></p>
+                    </div>
+                    <!-- Instrument & Side -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Futures Symbol</label>
+                        <select id="tradeSymbol" onchange="updateTradeHint()" data-testid="trade-symbol-select" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold bg-white text-slate-800">
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Position Side</label>
+                        <select id="tradeSide" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold bg-white text-slate-800">
+                            <option value="LONG">📈 LONG (Buy)</option>
+                            <option value="SHORT">📉 SHORT (Sell)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Contracts & Net PnL USD -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Position Size</label>
+                        <div class="flex gap-2">
+                            <input type="number" id="tradeContracts" value="2" min="1" step="1" oninput="updateTradeHint()" data-testid="trade-size-input" class="w-3/5 p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800">
+                            <select id="tradeSizeUnit" onchange="updateTradeHint()" data-testid="trade-size-unit" class="w-2/5 p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800"><option value="micros">Micros</option><option value="minis">Minis</option></select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Net Trade P&L ($ USD)</label>
+                        <input type="number" id="tradePnLUsd" data-testid="trade-pnl-input" value="180" step="5" oninput="updateTradeHint()" placeholder="+150 or -100" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800">
+                    </div>
+                </div>
+
+                <p id="tradeSizeHint" data-testid="trade-size-hint" class="text-[11px] font-medium -mt-1"></p>
+                <!-- Emotion / Mindset -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Trading Emotion / State</label>
+                    <select id="tradeEmotion" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold bg-white text-slate-800">
+                        <option value="Calm & Focused">☕ Calm & Focused</option>
+                        <option value="Confident">⭐ Confident Setup</option>
+                        <option value="Slight Anxious">😰 Slightly Anxious</option>
+                        <option value="FOMO / Rushed">⚡ FOMO / Impulsive</option>
+                    </select>
+                </div>
+
+                <!-- Followed Rules Checkbox -->
+                <div class="flex items-center gap-2 bg-stone-50 p-3 rounded-xl border border-stone-200">
+                    <input type="checkbox" id="tradeFollowedRules" checked class="w-4 h-4 accent-emerald-500 rounded cursor-pointer">
+                    <label for="tradeFollowedRules" class="text-xs font-bold text-slate-700 cursor-pointer">
+                        I followed my personal risk plan for this trade!
+                    </label>
+                </div>
+
+                <!-- Notes -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Journal Notes / Lessons</label>
+                    <textarea id="tradeNotes" rows="2" placeholder="Key setup notes or lessons learned..." class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-medium text-slate-800"></textarea>
+                </div>
+            </div>
+
+            <div class="pt-2 flex gap-2">
+                <button onclick="closeLogTradeModal()" class="w-1/2 py-2.5 rounded-xl border border-stone-200 text-slate-600 font-bold text-xs hover:bg-stone-100">Cancel</button>
+                <button onclick="saveLoggedTrade()" data-testid="save-trade-btn" class="w-1/2 neon-btn neon-btn-primary py-2.5 text-xs">Save Trade</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: PAYOUT REQUEST MODAL -->
+    <div id="modalPayout" class="fixed inset-0 neon-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="neon-card bg-white w-full max-w-md p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
+                    <span>💰 Request Payout</span>
+                </h3>
+                <button onclick="closePayoutModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">&times;</button>
+            </div>
+
+            <div class="space-y-3">
+                <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 space-y-1">
+                    <div class="font-bold">Lucid 90/10 Profit Share Rule</div>
+                    <p>You keep <strong>90%</strong> of requested profit. Minimum $500, maximum 50% of profit (up to $2,000). Each payout needs 5 green days, and the counter resets afterwards.</p>
+                </div>
+
+                <div>
+                        <label for="payoutDate" class="block text-xs font-bold text-slate-600 mb-1">Payout Date <span class="font-medium text-slate-400">(change it to backdate)</span></label>
+                        <input type="date" id="payoutDate" oninput="updatePayoutCalc()" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-1">Available Profit Balance ($ USD)</label>
+                    <input type="text" id="payoutAvailableUsd" readonly value="$0.00" class="w-full p-2.5 rounded-xl border border-stone-200 bg-stone-100 text-xs font-bold text-slate-700">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Requested Gross Payout ($ USD)</label>
+                    <input type="number" id="payoutAmountUsd" value="1000" min="500" step="50" oninput="updatePayoutCalc()" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800">
+                </div>
+
+                <div class="p-3 bg-stone-50 rounded-xl border border-stone-200 text-xs space-y-2">
+                    <div class="flex justify-between text-slate-600">
+                        <span>Your 90% Share (USD):</span>
+                        <span id="payoutUserUsd" class="font-bold text-emerald-700">$900.00 USD</span>
+                    </div>
+                    <div class="flex justify-between text-slate-600">
+                        <span>Lucid 10% Share (USD):</span>
+                        <span id="payoutLucidUsd" class="font-bold text-slate-500">$100.00 USD</span>
+                    </div>
+                    <div class="flex justify-between pt-2 border-t border-stone-200 text-slate-800 font-bold">
+                        <span>Estimated NZD Cash Payout:</span>
+                        <span id="payoutUserNzd" class="text-teal-700 font-extrabold text-sm">$1,530.00 NZD</span>
+                    </div>
+                </div>
+            </div>
+
+            <p id="payoutWarn" class="text-xs font-bold text-rose-600 hidden"></p>
+                <div class="pt-2 flex gap-2">
+                    <button onclick="closePayoutModal()" class="w-1/2 py-2.5 rounded-xl border border-stone-200 text-slate-600 font-bold text-xs hover:bg-stone-100">Cancel</button>
+                <button id="btnConfirmPayout" onclick="submitPayoutRequest()" class="w-1/2 neon-btn bg-amber-300 hover:bg-amber-400 text-amber-950 py-2.5 text-xs font-bold">Confirm Payout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: EXCHANGE RATE MODAL -->
+    <div id="modalFx" class="fixed inset-0 neon-backdrop z-50 flex items-center justify-center p-4 hidden">
+        <div class="neon-card bg-white w-full max-w-sm p-5 space-y-4">
+            <h3 class="font-bold text-slate-800 text-md">Set USD to NZD Exchange Rate</h3>
+            <div>
+                <label class="block text-xs font-bold text-slate-600 mb-1">1.00 USD = NZD ($)</label>
+                <input type="number" id="inputFxRate" value="1.70" step="0.01" class="w-full p-2.5 rounded-xl border border-stone-200 text-xs font-bold text-slate-800">
+            </div>
+            <div class="flex gap-2">
+                <button onclick="closeExchangeModal()" class="w-1/2 py-2 rounded-xl border border-stone-200 text-xs font-bold text-slate-600">Cancel</button>
+                <button onclick="saveExchangeRate()" class="w-1/2 neon-btn neon-btn-primary py-2 text-xs font-bold">Save Rate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: ACCOUNT BLOWN -->
+    <div id="modalBlown" data-testid="blown-modal" class="fixed inset-0 neon-backdrop z-[65] flex items-center justify-center p-4 hidden">
+        <div class="neon-card w-full max-w-md p-6 space-y-4" style="border-color:#f43f5e;box-shadow:0 0 44px -10px rgba(244,63,94,0.7)">
+            <div class="text-[11px] font-bold tracking-[0.25em] text-rose-500">HARD RULE BROKEN</div>
+            <h3 class="text-2xl font-bold text-slate-800">Account blown</h3>
+            <p id="blownModalText" data-testid="blown-modal-text" class="text-sm text-slate-700 leading-relaxed"></p>
+            <p id="blownModalSub" data-testid="blown-modal-sub" class="text-xs text-slate-500"></p>
+            <button onclick="closeBlownModal()" data-testid="blown-modal-ack-btn" class="w-full neon-btn neon-btn-primary py-2.5 text-sm">Restart at Stage 1</button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: DELETE ARCHIVED RUN -->
+    <div id="modalDeleteRun" data-testid="delete-run-modal" class="fixed inset-0 neon-backdrop z-[60] flex items-center justify-center p-4 hidden">
+        <div class="neon-card w-full max-w-md p-6 space-y-4">
+            <h3 id="deleteRunTitle" class="text-lg font-bold text-slate-800"></h3>
+            <p id="deleteRunText" data-testid="delete-run-text" class="text-sm text-slate-700 leading-relaxed"></p>
+            <div class="flex gap-2 pt-1">
+                <button onclick="closeDeleteRunModal()" data-testid="delete-run-cancel-btn" class="w-1/2 py-2.5 rounded-xl border border-stone-200 text-slate-600 font-bold text-xs hover:bg-stone-100">Cancel</button>
+                <button onclick="confirmDeleteRun()" data-testid="delete-run-confirm-btn" class="w-1/2 neon-btn neon-btn-danger py-2.5 text-xs">Delete Forever</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ==========================================================================
+           LUCIDFLEX BATTLE PASS CORE APP STATE & ENGINE
+           ========================================================================== */
+
+        const STORAGE_KEY = 'lucidflex_battlepass_v1';
+
+        // Default App State
+        const defaultState = {
+            beginnerMode: true,
+            exchangeRate: 1.70,
+            settings: {
+                startingBalance: 50000.00,
+                dailyLossLimit: 1000.00,
+                // Unit conversion table (source of truth for Calculator + Journal). Rules use micros/minis only.
+                assets: {
+                    MES: { name: 'Micro E-mini S&P 500', mini: 'ES', tickSize: 0.25, tickVal: 1.25, unitsPerMicro: null, unit: '' },
+                    MNQ: { name: 'Micro E-mini Nasdaq', mini: 'NQ', tickSize: 0.25, tickVal: 0.50, unitsPerMicro: null, unit: '' },
+                    MGC: { name: 'Micro Gold', mini: 'GC', tickSize: 0.10, tickVal: 1.00, unitsPerMicro: 10, unit: 'oz gold' },
+                    MCL: { name: 'Micro Crude Oil', mini: 'CL', tickSize: 0.01, tickVal: 1.00, unitsPerMicro: 100, unit: 'barrels oil' },
+                    MBT: { name: 'Micro Bitcoin', mini: 'BTC', tickSize: 5.00, tickVal: 0.05, unitsPerMicro: 0.01, unit: 'BTC' },
+                    MET: { name: 'Micro Ether', mini: 'ETH', tickSize: 0.50, tickVal: 0.005, unitsPerMicro: 0.01, unit: 'ETH' }
+                }
+            },
+            activeRun: {
+                runNum: 1,
+                stage: 1, // 1: Eval, 2: Funded Payout 1-4, 3: Final Payout 5, 4: Live Review
+                balance: 50000.00,
+                highWaterMark: 50000.00,
+                eodThreshold: 48000.00,
+                totalPayoutsUsd: 0.00,
+                payoutCount: 0,
+                dailyLossToday: 0.00,
+                consistencyBreached: false,
+                positionCapMicros: 40,
+                trades: [],
+                payouts: []
+            },
+            personalRules: [
+                { id: 1, text: 'Maximum $250 USD risk on any single trade.', isLucid: false },
+                { id: 2, text: 'No holding positions across 4:45 PM ET market close.', isLucid: true },
+                { id: 3, text: 'Maximum 20 micros during initial funded stage.', isLucid: true },
+                { id: 4, text: 'Stop trading for the day after 2 consecutive losses.', isLucid: false }
+            ],
+            careerHistory: []
+        };
+
+        let appState = JSON.parse(JSON.stringify(defaultState));
+
+        // Dictionary Terms Database
+        const baseDictionaryTerms = [
+            { term: 'EOD Trailing Drawdown', category: 'LUCID', icon: '🛡️', simple: 'A moving safety floor calculated at the end of each day.', why: 'It locks at $50,100 once your balance touches $52,100.', example: 'If balance is $51,000, floor is $49,000.' },
+            { term: '50% Consistency Rule', category: 'LUCID', icon: '🎯', simple: 'Your single biggest day cannot make up over half your total profit.', why: 'Ensures safe, steady risk management rather than lucky gambling.', example: 'To pass with a $1,800 best day, you need at least $3,600 total profit.' },
+            { term: 'DLL (Daily Loss Limit)', category: 'LUCID', icon: '⚡', simple: 'A rule that auto-fails an account if daily losses exceed a cap.', why: 'This hardened tracker enforces a $1,000 DLL. Breach it and the run is archived as failed and resets to Stage 1.', example: 'Down -$1,050 on Tuesday = account blown, back to Stage 1.' },
+            { term: 'Micro Contract (MES / MNQ)', category: 'FUTURES', icon: '📊', simple: '1/10th the size of a standard mini contract.', why: 'Allows precise risk sizing ($1.25 or $0.50 per tick).', example: '10 MES micros = 1 ES mini contract.' },
+            { term: 'Tick', category: 'FUTURES', icon: '📏', simple: 'The smallest price movement possible in a futures market.', why: 'MES ticks move in 0.25 increments worth $1.25 per micro.', example: 'Moving 4 ticks equals 1 full price point.' },
+            { term: 'Qualifying Green Day', category: 'LUCID', icon: '🍃', simple: 'A day where your net trading profit is +$150 USD or more.', why: 'You need 5 Green Days to pass Evaluation and request payouts.', example: '+$180 is a green day; +$120 does not count toward the 5.' },
+            { term: 'Position Scaling Ladder', category: 'LUCID', icon: '🪜', simple: 'Automatic cap on contracts based on current funded balance.', why: 'Protects profits while allowing contract growth as balance expands.', example: '$0-$999 profit = Max 20 micros.' },
+            { term: 'Risk-to-Reward Ratio (R/R)', category: 'RISK', icon: '⚖️', simple: 'Comparing what you risk losing vs what you plan to gain.', why: 'Aiming for 1:2 R/R lets you be profitable even winning 40% of trades.', example: 'Risking $100 to make $200.' }
+        ];
+
+        const newDictionaryTerms = [
+            { term: 'Market Order', category: 'ORDER TYPES', icon: '🚀', simple: 'Buy or sell right now at the best available price.', why: 'Guarantees a fill, not a price. Fast markets can fill you worse than expected.', example: 'Clicking BUY MKT on MES fills instantly at the current ask.' },
+            { term: 'Limit Order', category: 'ORDER TYPES', icon: '🎯', simple: 'An order that only fills at your price or better.', why: 'Controls your entry price, but the market may never reach it.', example: 'Buy limit MGC at 2,350.0 only fills at 2,350.0 or lower.' },
+            { term: 'Stop Order', category: 'ORDER TYPES', icon: '🛑', simple: 'Becomes a market order once price touches your trigger.', why: 'The standard way to place a protective stop loss.', example: 'Long MES at 5,000 with a sell stop at 4,990.' },
+            { term: 'Stop-Limit Order', category: 'ORDER TYPES', icon: '🧱', simple: 'A stop that turns into a limit order instead of a market order.', why: 'Avoids bad fills, but can skip right past you in a fast move and leave you unprotected.', example: 'Stop 4,990, limit 4,989: will not sell below 4,989.' },
+            { term: 'Bracket Order (OCO)', category: 'ORDER TYPES', icon: '🧷', simple: 'An entry with an attached stop loss and profit target; one cancels the other.', why: 'Your risk and reward are set before emotions kick in.', example: 'Entry 5,000, target 5,020, stop 4,990.' },
+            { term: 'Stop Loss', category: 'RISK', icon: '🧯', simple: 'The pre-planned price where you admit you are wrong and exit.', why: 'Without one, a single trade can blow the EOD drawdown.', example: 'Risking 10 pts on 4 MES = $200 max loss.' },
+            { term: 'Position Sizing', category: 'RISK', icon: '📐', simple: 'Choosing how many contracts to trade based on risk, not feelings.', why: 'Keeps each loss small and inside the stage cap. Over the cap = blown.', example: 'Risk $200 / $50 per micro = 4 micros.' },
+            { term: 'Max Drawdown', category: 'RISK', icon: '📉', simple: 'The biggest drop from a peak balance to a low point.', why: 'Prop firms fail accounts when drawdown passes a set limit.', example: 'Peak $51,500 down to $50,000 = $1,500 drawdown.' },
+            { term: 'Mini Contract', category: 'CONTRACTS', icon: '📦', simple: 'The full-size standard futures contract. 1 mini = 10 micros.', why: 'Caps are listed in both: 40 micros equals 4 minis.', example: '1 GC mini = 10 MGC micros = 100 oz gold.' },
+            { term: 'Contract Multiplier', category: 'CONTRACTS', icon: '✖️', simple: 'Dollar value of a 1-point move for one contract.', why: 'Tells you how fast P&L moves per point.', example: 'MES = $5 per point; MGC = $10 per $1 move in gold.' },
+            { term: 'Tick Value', category: 'CONTRACTS', icon: '💲', simple: 'Dollars gained or lost when price moves one tick.', why: 'Used by the calculator to size positions exactly.', example: 'MCL tick = $0.01 = $1.00 per micro.' },
+            { term: 'Underlying Units', category: 'CONTRACTS', icon: '⚖️', simple: 'The real quantity of the asset one contract represents.', why: 'Helps you feel the true size of a position.', example: '40 MGC micros ≈ 400 oz gold; 10 MCL micros ≈ 1,000 barrels.' },
+            { term: 'Expiration & Rollover', category: 'CONTRACTS', icon: '📅', simple: 'Futures expire; traders move to the next month before that.', why: 'Trading the wrong month means thin liquidity and odd prices.', example: 'Roll MES from June (M) to September (U) contract.' },
+            { term: 'Support & Resistance', category: 'ANALYSIS', icon: '🧭', simple: 'Price zones where buying (support) or selling (resistance) tends to show up.', why: 'Good places for entries, stops and targets.', example: 'MES bounced at 4,980 three times: that is support.' },
+            { term: 'VWAP', category: 'ANALYSIS', icon: '〰️', simple: 'Volume-Weighted Average Price for the session.', why: 'Institutions benchmark fills to it; price often reacts around it.', example: 'Longs above VWAP, shorts below it as a simple bias.' },
+            { term: 'Moving Average', category: 'ANALYSIS', icon: '📈', simple: 'The average closing price over the last N bars, drawn as a line.', why: 'Smooths noise and shows the trend direction.', example: '20 EMA sloping up = short-term uptrend.' },
+            { term: 'ATR (Average True Range)', category: 'ANALYSIS', icon: '🌊', simple: 'How far price typically moves per bar.', why: 'Sets realistic stop distances so noise does not stop you out.', example: 'ATR 6 pts on MES 5-min: a 2 pt stop is too tight.' },
+            { term: 'Bid-Ask Spread', category: 'MARKET STRUCTURE', icon: '↔️', simple: 'The gap between the best buy price and best sell price.', why: 'It is a hidden cost on every market order.', example: 'Bid 5,000.00 / Ask 5,000.25 = 1 tick spread.' },
+            { term: 'Liquidity', category: 'MARKET STRUCTURE', icon: '💧', simple: 'How easily you can trade without moving the price.', why: 'Thin markets mean slippage and surprise fills.', example: 'MES at 10 AM ET is very liquid; at 3 AM it is thin.' },
+            { term: 'Higher Highs / Higher Lows', category: 'MARKET STRUCTURE', icon: '🪜', simple: 'An uptrend makes each swing high and low above the last.', why: 'Breaking the pattern warns the trend may be ending.', example: 'Lows at 4,980 → 4,990 → 5,000 = higher lows.' },
+            { term: 'TICK', category: 'FUTURES', icon: '📏', simple: 'Duplicate casing test entry.', why: 'Should be deduped.', example: '-' },
+            { term: 'risk-to-reward ratio (r/r)', category: 'RISK', icon: '⚖️', simple: 'Duplicate casing test entry.', why: 'Should be deduped.', example: '-' }
+        ];
+        // Merge + dedupe by lowercased term; existing entries win on collision.
+        const dictionaryTerms = (() => {
+            const seen = new Set(baseDictionaryTerms.map(t => t.term.trim().toLowerCase()));
+            const out = [...baseDictionaryTerms];
+            newDictionaryTerms.forEach(t => {
+                const k = t.term.trim().toLowerCase();
+                if (!seen.has(k)) { seen.add(k); out.push(t); }
+            });
+            return out;
+        })();
+        const DICT_CATS = [['ALL', 'All Terms'], ['LUCID', 'Lucid Rules'], ['FUTURES', 'Futures Mechanics'], ['RISK', 'Risk & Psychology'], ['ORDER TYPES', 'Order Types'], ['CONTRACTS', 'Contracts'], ['ANALYSIS', 'Analysis'], ['MARKET STRUCTURE', 'Market Structure']];
+
+        let activeDictCategory = 'ALL';
+
+        
+
+        function saveState() {
+            const blown = enforceRules();
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (e) {
+                console.error("Failed saving state", e);
+            }
+            renderAll();
+            if (blown) showBlownModal(blown);
+            return blown;
+        }
+
+        // Initialize App on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            startNzClock();
+            saveState();
+        });
+
+        function switchTab(tabId) {
+            ['dashboard', 'journal', 'calculator', 'dictionary', 'rules', 'career'].forEach(id => {
+                const sec = document.getElementById(`sec-${id}`);
+                const btn = document.getElementById(`tab-${id}`);
+                if (sec && btn) {
+                    if (id === tabId) {
+                        sec.classList.remove('hidden');
+                        btn.classList.add('active');
+                    } else {
+                        sec.classList.add('hidden');
+                        btn.classList.remove('active');
+                    }
+                }
+            });
+        }
+
+        
+
+        
+
+        
+
+        
+
+        
+
+        function renderConsistencyBar(m) {
+            const bar = document.getElementById('consistencyBar');
+            const ratioText = document.getElementById('consistencyRatio');
+            const statusBadge = document.getElementById('consistencyPassBadge');
+
+            const pct = Math.min(100, m.consistencyPct);
+            bar.style.width = `${pct}%`;
+            ratioText.innerText = `${pct.toFixed(1)}%`;
+
+            if (m.totalWinProfit === 0) {
+                bar.className = 'bg-stone-300 h-full rounded-full transition-all duration-300';
+                statusBadge.className = 'font-bold text-slate-500';
+                statusBadge.innerText = 'No Profit Yet';
+            } else if (pct <= 50) {
+                bar.className = 'bg-emerald-400 h-full rounded-full transition-all duration-300';
+                statusBadge.className = 'font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full';
+                statusBadge.innerText = 'PASSED (<=50%)';
+            } else {
+                bar.className = 'bg-amber-400 h-full rounded-full transition-all duration-300';
+                statusBadge.className = 'font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full';
+                statusBadge.innerText = 'TOO HIGH (>50%)';
+            }
+        }
+
+
+        /* ==========================================================================
+           ENGINE: everything is recalculated from the trade + payout lists, in date
+           order, so backdated entries slot in correctly.
+           ========================================================================== */
+        const todayNZ = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Pacific/Auckland' });
+        const fmtD = d => new Date(d + 'T12:00:00').toLocaleDateString('en-NZ', { day: 'numeric', month: 'short', year: 'numeric' });
+        const usd = n => (n < 0 ? '-' : '') + '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        let lastLogDate = null;
+
+        function toast(msg) {
+            const el = document.getElementById('toast');
+            el.innerText = msg;
+            el.classList.remove('hidden');
+            clearTimeout(toast._t);
+            toast._t = setTimeout(() => el.classList.add('hidden'), 4500);
+        }
+
+        function normDate(v) {
+            if (/^\d{4}-\d{2}-\d{2}$/.test(v || '')) return v;
+            const d = new Date(v);
+            return isNaN(d) ? todayNZ() : d.toLocaleDateString('en-CA', { timeZone: 'Pacific/Auckland' });
+        }
+
+                const freshRun = n => Object.assign(JSON.parse(JSON.stringify(defaultState.activeRun)), { runNum: n });
+        const capFor = (funded, profit) => !funded ? 40 : (profit >= 2000 ? 40 : profit >= 1000 ? 30 : 20);
+        const assetOf = sym => appState.settings.assets[sym];
+
+        function unitsText(sym, micros) {
+            const a = assetOf(sym);
+            if (!a || !a.unitsPerMicro) return `${micros} micros (${a ? a.mini : sym} index contract, no physical units)`;
+            const u = +(micros * a.unitsPerMicro).toFixed(4);
+            return `${micros} micros ≈ ${u.toLocaleString('en-US')} ${a.unit}`;
+        }
+
+        function sizeCell(t) {
+            const main = t.sizeUnit === 'minis' ? `${t.contracts / 10} Minis` : `${t.contracts} Micros`;
+            return `${main}<div class="text-[10px] text-slate-500">${unitsText(t.symbol, t.contracts).replace(/^\d+ micros /, '')}</div>`;
+        }
+
+        const BADGES = [
+            { id: 'first_trade', title: 'First Trade', icon: '⭐', desc: 'Logged your 1st paper trade', test: (m, T) => T.length > 0 },
+            { id: 'green_day', title: 'Green Day', icon: '🍃', desc: 'Hit +$150 USD net profit day', test: (m, T) => { const d = {}; T.forEach(t => d[t.date] = (d[t.date] || 0) + t.pnl); return Object.values(d).some(v => v >= 150); } },
+            { id: 'consistency', title: 'Consistency Master', icon: '🎯', desc: '50% consistency rule passing', test: m => m.totalWinProfit > 0 && m.consistencyPct <= 50 },
+            { id: 'eval_passed', title: 'Eval Passed', icon: '🎓', desc: 'Reached the Funded stage', test: m => m.funded },
+            { id: 'first_payout', title: 'First Payout', icon: '💰', desc: 'Requested 1st profit payout', test: m => m.payN > 0 },
+            { id: 'champion', title: 'Battle Pass Champion', icon: '🏆', desc: 'Completed all 5 payouts', test: m => m.complete },
+            { id: 'calc_scholar', title: 'Calculator Scholar', icon: '🧮', desc: 'Calculated safe contract size', test: () => true },
+            { id: 'rule_follower', title: 'Rule Follower', icon: '📜', desc: 'Maintained discipline checklist', test: () => true },
+        ];
+        const earnedBadgeIds = m => {
+            const T = (appState.activeRun.trades || []).filter(t => !m.ignored.has(t.id));
+            return BADGES.filter(b => b.test(m, T)).map(b => b.id);
+        };
+
+        function migrateHistory(h) {
+            const o = String(h.outcome || '');
+            const outcome = ['passed', 'failed', 'manual_reset'].includes(o) ? o : o.includes('BREACHED') ? 'failed' : o.includes('COMPLETED') ? 'passed' : 'manual_reset';
+            return Object.assign({ blownReason: outcome === 'failed' ? 'EOD trailing drawdown (legacy run)' : null, badgesEarned: [] }, h, { outcome });
+        }
+
+        function archiveRun(outcome, m, reason) {
+            const run = appState.activeRun;
+            const nzd = (run.payouts || []).reduce((a, p) => m.ignored.has(p.id) ? a : a + p.gross * 0.9 * p.fx, 0);
+            const rec = {
+                runNum: run.runNum, outcome, blownReason: reason || null, badgesEarned: earnedBadgeIds(m),
+                finalStage: m.stageNum, finalBalance: m.balance, payoutsUsd: m.paidUsd, payoutsNzd: nzd,
+                dateEnded: fmtD(m.endDate || todayNZ()),
+                trades: JSON.parse(JSON.stringify(run.trades || [])), payouts: JSON.parse(JSON.stringify(run.payouts || []))
+            };
+            appState.careerHistory.push(rec);
+            appState.activeRun = freshRun(run.runNum + 1);
+            lastLogDate = null;
+            return rec;
+        }
+
+        // Atomic auto-reset: freeze -> snapshot as failed -> runNum++ -> fresh Stage 1.
+        function enforceRules() {
+            const m = replay();
+            if (!m.breached) return null;
+            return archiveRun('failed', m, m.blownReason);
+        }
+
+        function showBlownModal(rec) {
+            document.getElementById('blownModalText').innerText = `Account blown — ${rec.blownReason}. Reset to Stage 1.`;
+            document.getElementById('blownModalSub').innerText = `Run #${rec.runNum} was archived as a failed run on ${rec.dateEnded}. You are now on Run #${appState.activeRun.runNum} at ${usd(appState.settings.startingBalance)}.`;
+            document.getElementById('modalBlown').classList.remove('hidden');
+        }
+        function closeBlownModal() { document.getElementById('modalBlown').classList.add('hidden'); }
+
+        let pendingDeleteRun = null;
+        function badgesUniqueTo(runNum) {
+            const h = appState.careerHistory.find(x => x.runNum === runNum);
+            const held = new Set(earnedBadgeIds(replay()));
+            appState.careerHistory.forEach(x => { if (x.runNum !== runNum) (x.badgesEarned || []).forEach(id => held.add(id)); });
+            return (h.badgesEarned || []).filter(id => !held.has(id));
+        }
+        function openDeleteRunModal(runNum) {
+            pendingDeleteRun = runNum;
+            const n = badgesUniqueTo(runNum).length;
+            document.getElementById('deleteRunTitle').innerText = `Delete Run #${runNum}?`;
+            document.getElementById('deleteRunText').innerText = `Delete Run #${runNum}? This revokes ${n} badge${n === 1 ? '' : 's'} and removes it from lifetime stats. Cannot be undone.`;
+            document.getElementById('modalDeleteRun').classList.remove('hidden');
+        }
+        function closeDeleteRunModal() { pendingDeleteRun = null; document.getElementById('modalDeleteRun').classList.add('hidden'); }
+        function confirmDeleteRun() {
+            const id = pendingDeleteRun;
+            appState.careerHistory = appState.careerHistory.filter(h => h.runNum !== id);
+            closeDeleteRunModal();
+            saveState();
+            toast(`Run #${id} deleted. Lifetime stats recomputed.`);
+        }
+
+        const BANNER_KEY = 'lucidflex_reset_banner_dismissed';
+        function renderBanners() {
+            const off = sessionStorage.getItem(BANNER_KEY) === '1';
+            document.querySelectorAll('.reset-banner').forEach(b => b.classList.toggle('hidden', off));
+        }
+        function dismissBanner() { sessionStorage.setItem(BANNER_KEY, '1'); renderBanners(); }
+
+        function renderDictPills() {
+            document.getElementById('dictCatPills').innerHTML = DICT_CATS.map(([c, label]) => {
+                const on = c === activeDictCategory;
+                return `<button onclick="setDictCategory('${c}')" data-testid="dict-cat-${c.toLowerCase().replace(/ /g, '-')}" class="px-3 py-1.5 rounded-xl font-bold whitespace-nowrap border ${on ? 'bg-amber-200 text-amber-900 border-amber-400 neon-stage' : 'bg-stone-100 text-slate-600 border-stone-200'}">${label}</button>`;
+            }).join('');
+        }
+
+        function tradeMicros() {
+            const q = parseFloat(document.getElementById('tradeContracts').value) || 0;
+            return document.getElementById('tradeSizeUnit').value === 'minis' ? Math.round(q * 10) : Math.round(q);
+        }
+
+
+        function migrateRun(run) {
+            run.payouts = run.payouts || [];
+            run.trades = (run.trades || []).filter(t => {
+                if (t.symbol === 'PAYOUT') {
+                    run.payouts.push({ id: t.id, date: normDate(t.date), gross: Math.abs(parseFloat(t.pnl) || 0), fx: appState.exchangeRate || 1.7 });
+                    return false;
+                }
+                t.date = normDate(t.date);
+                t.pnl = parseFloat(t.pnl) || 0;
+                return true;
+            });
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) appState = Object.assign(JSON.parse(JSON.stringify(defaultState)), JSON.parse(saved));
+            } catch (e) {
+                console.error("Failed loading state", e);
+            }
+            const ds = JSON.parse(JSON.stringify(defaultState.settings));
+            appState.settings = Object.assign(ds, appState.settings || {});
+            appState.settings.assets = Object.assign({}, ds.assets, appState.settings.assets || {});
+            appState.activeRun = Object.assign(freshRun(appState.activeRun.runNum || 1), appState.activeRun);
+            appState.careerHistory = (appState.careerHistory || []).map(migrateHistory);
+            migrateRun(appState.activeRun);
+        }
+
+        function consistencyOf(dayMap) {
+            const v = Object.values(dayMap);
+            const total = v.reduce((a, b) => a + b, 0);
+            const max = v.length ? Math.max(0, ...v) : 0;
+            return { total, max, pct: total > 0 ? (max / total) * 100 : 0 };
+        }
+
+        function replay(asOf, before) {
+            const run = appState.activeRun;
+            const inRange = x => before ? x.date < asOf : (!asOf || x.date <= asOf);
+            const T = (run.trades || []).filter(inRange);
+            const P = (run.payouts || []).filter(inRange);
+            const days = [...new Set([...T.map(t => t.date), ...P.map(p => p.date)])].sort();
+            const dayPnl = {};
+            T.forEach(t => dayPnl[t.date] = (dayPnl[t.date] || 0) + t.pnl);
+            const dll = appState.settings.dailyLossLimit;
+
+            const R = { phase: 'EVAL', balance: 50000, hwm: 50000, eodThreshold: 48000, greens: [], payN: 0,
+                        evalDays: {}, passDate: null, endDate: null, ignored: new Set(), tradePhase: {}, paidUsd: 0,
+                        reasons: [], consistencyBreached: false };
+            const setFloor = () => { R.eodThreshold = Math.max(48000, Math.min(R.hwm - 2000, R.phase === 'EVAL' ? 50100 : 50000)); };
+            const blow = (d, dp) => { R.phase = 'BREACHED'; R.endDate = d; dp.forEach(x => R.ignored.add(x.id)); };
+
+            for (const d of days) {
+                const dt = T.filter(t => t.date === d), dp = P.filter(p => p.date === d);
+                if (R.phase === 'BREACHED' || R.phase === 'COMPLETE') { dt.concat(dp).forEach(x => R.ignored.add(x.id)); continue; }
+
+                if (dt.length) {
+                    const n = dayPnl[d];
+                    // Cap is set by the stage at the start of the trading day. No grace.
+                    const cap = capFor(R.phase !== 'EVAL', R.balance - 50000);
+                    const worst = Math.max(...dt.map(t => t.contracts || 0));
+                    dt.forEach(t => R.tradePhase[t.id] = R.phase);
+                    if (worst > cap) R.reasons.push(`position size overrun (${worst} micros vs ${cap}-micro ${R.phase === 'EVAL' ? 'Evaluation' : 'Funded'} cap)`);
+                    if (n <= -dll) R.reasons.push(`daily loss limit breached (${usd(n)} on ${fmtD(d)}, limit ${usd(dll)})`);
+                    R.balance += n;
+                    if (R.phase === 'EVAL') R.evalDays[d] = n;
+                    else if (n >= 150) R.greens.push(d);
+                    R.hwm = Math.max(R.hwm, R.balance);
+                    setFloor();
+                    if (R.balance <= R.eodThreshold) R.reasons.push(`EOD trailing drawdown breached (balance ${usd(R.balance)} hit floor ${usd(R.eodThreshold)})`);
+                    const cons = consistencyOf(R.evalDays);
+                    if (R.phase === 'EVAL' && R.balance >= 53000 && cons.pct > 50) {
+                        R.consistencyBreached = true;
+                        R.reasons.push(`consistency rule violated (best day ${cons.pct.toFixed(1)}% of profit at target, max 50%)`);
+                    }
+                    if (R.reasons.length) { blow(d, dp); continue; }
+                    if (R.phase === 'EVAL' && R.balance >= 53000 && cons.pct <= 50) {
+                        R.phase = 'FUNDED'; R.passDate = d;
+                        R.balance = 50000; R.hwm = 50000; setFloor(); R.greens = [];
+                    }
+                }
+                for (const p of dp) {
+                    if (R.phase === 'BREACHED') { R.ignored.add(p.id); continue; }
+                    if (R.phase !== 'FUNDED') { R.ignored.add(p.id); continue; }
+                    R.balance -= p.gross; R.payN++; R.paidUsd += p.gross * 0.9; R.greens = [];
+                    if (R.balance <= R.eodThreshold) { R.reasons.push(`EOD trailing drawdown breached after payout (balance ${usd(R.balance)})`); R.phase = 'BREACHED'; R.endDate = d; }
+                    else if (R.payN >= 5) { R.phase = 'COMPLETE'; R.endDate = d; }
+                }
+            }
+
+            const profit = R.balance - 50000;
+            const cons = consistencyOf(R.evalDays);
+            const funded = !!R.passDate;
+            const maxMicros = capFor(funded, profit);
+            const maxPayout = Math.min(2000, Math.floor(Math.max(0, profit) * 0.5));
+            const [first, ...rest] = R.reasons;
+            return {
+                phase: R.phase, funded, passDate: R.passDate, endDate: R.endDate,
+                stageNum: !funded ? 1 : R.phase === 'COMPLETE' ? 4 : (R.payN >= 4 ? 3 : 2),
+                netPnL: profit, profit, balance: R.balance, highWaterMark: R.hwm,
+                eodThreshold: R.eodThreshold, bufferRemaining: Math.max(0, R.balance - R.eodThreshold),
+                greens: R.greens, greenDays: R.greens.length,
+                consistencyPct: cons.pct, maxWinDay: cons.max, totalWinProfit: Math.max(0, cons.total),
+                maxMicros, maxMinis: maxMicros / 10,
+                breached: R.phase === 'BREACHED', complete: R.phase === 'COMPLETE',
+                blownReasons: R.reasons,
+                blownReason: first ? first.charAt(0).toUpperCase() + first.slice(1) + (rest.length ? ` (also: ${rest.join('; ')})` : '') : null,
+                consistencyBreached: R.consistencyBreached, dayPnl,
+                payN: R.payN, paidUsd: R.paidUsd, maxPayout,
+                canPay: R.phase === 'FUNDED' && R.greens.length >= 5 && maxPayout >= 500,
+                ignored: R.ignored, tradePhase: R.tradePhase
+            };
+        }
+
+        function calculateMetrics() {
+            const m = replay();
+            const run = appState.activeRun;
+            run.balance = m.balance; run.highWaterMark = m.highWaterMark; run.eodThreshold = m.eodThreshold;
+            run.payoutCount = m.payN; run.stage = m.stageNum; run.totalPayoutsUsd = m.paidUsd;
+            run.positionCapMicros = m.maxMicros;
+            run.consistencyBreached = m.consistencyBreached;
+            run.dailyLossToday = Math.max(0, -(m.dayPnl[todayNZ()] || 0));
+            return m;
+        }
+
+        function payoutProblem(dateStr, gross) {
+            const m = replay(dateStr);
+            if (!m.funded) return 'Payouts open after you pass the evaluation (as of this date).';
+            if (m.breached) return 'The account was already breached by this date.';
+            if (m.complete) return 'All 5 payouts were already claimed by this date.';
+            if (m.greenDays < 5) return `Needs 5 green days since your last payout. You have ${m.greenDays} as of ${fmtD(dateStr)}.`;
+            if (m.maxPayout < 500) return 'Profit must reach $1,000 before the $500 minimum payout is possible.';
+            if (!(gross >= 500) || gross > m.maxPayout) return `Amount must be between $500 and ${usd(m.maxPayout)} (50% of profit, max $2,000).`;
+            return '';
+        }
+
+        function renderAll() {
+            const metrics = calculateMetrics();
+            const run = appState.activeRun;
+
+            document.getElementById('headerRunNum').innerText = run.runNum;
+            document.getElementById('headerFxRate').innerText = appState.exchangeRate.toFixed(2);
+            const dllTxt = usd(appState.settings.dailyLossLimit).replace('.00', '');
+            document.getElementById('headerDllBadge').innerText = 'DLL ' + dllTxt;
+            document.getElementById('rulesDllText').innerText = dllTxt;
+            renderBanners();
+            renderDictPills();
+            document.getElementById('beginnerToggleText').innerText = appState.beginnerMode ? 'ON' : 'OFF';
+
+            const stageNames = ['Stage 1: Evaluation', 'Stage 2: Funded Payout 1-4', 'Stage 3: 5th Payout', 'Stage 4: Live Review 🏆'];
+            const badge = document.getElementById('headerStageBadge');
+            document.getElementById('headerStageText').innerText = metrics.breached ? 'RUN BREACHED 💔' : stageNames[metrics.stageNum - 1];
+            badge.className = 'neon-badge neon-stage border ' + (metrics.breached ? 'bg-rose-100 text-rose-800 border-rose-300' : metrics.complete ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-emerald-100 text-emerald-800 border-emerald-300');
+
+            document.getElementById('dashBalance').innerText = usd(metrics.balance);
+            const pnlVal = metrics.netPnL;
+            document.getElementById('dashPnL').innerHTML = `<span class="text-slate-500">${metrics.funded ? 'Funded P&L:' : 'P&L:'}</span> <span class="${pnlVal >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}">${pnlVal >= 0 ? '+' : ''}${usd(pnlVal)}</span>`;
+
+            if (!metrics.funded) {
+                document.getElementById('targetCardTitle').innerText = 'TARGET ($53,000)';
+                document.getElementById('dashTargetDist').innerText = usd(Math.max(0, 53000 - metrics.balance));
+                document.getElementById('dashTargetSub text').innerText = 'Needed to pass Eval ($53,000)';
+            } else {
+                document.getElementById('targetCardTitle').innerText = 'MAX PAYOUT NOW';
+                document.getElementById('dashTargetDist').innerText = usd(metrics.maxPayout >= 500 ? metrics.maxPayout : 0);
+                document.getElementById('dashTargetSub text').innerText = `${metrics.payN} / 5 payouts • ${metrics.greenDays} / 5 green days`;
+            }
+
+            document.getElementById('dashDrawdownThreshold').innerText = usd(metrics.eodThreshold);
+            document.getElementById('dashBufferRemaining').innerText = usd(metrics.bufferRemaining);
+            document.getElementById('dashAllowedContracts').innerText = `${metrics.maxMicros} Micros`;
+            document.getElementById('dashContractSub').innerText = `Or max ${metrics.maxMinis} Minis`;
+
+            const begCard = document.getElementById('beginnerModeCard');
+            if (appState.beginnerMode) begCard.classList.remove('hidden'); else begCard.classList.add('hidden');
+
+            renderGuidance(metrics);
+            renderRoadmap(metrics);
+            renderGreenDayDots(metrics);
+            renderConsistencyBar(metrics);
+            renderJournalTable();
+            renderDictionary();
+            renderRulesList();
+            renderCareerSection();
+            runCalculator();
+        }
+
+        function renderGuidance(m) {
+            const textEl = document.getElementById('guidanceText');
+            const actionEl = document.getElementById('guidanceActionArea');
+            actionEl.innerHTML = '';
+            const logBtn = `<button onclick="openLogTradeModal()" class="neon-btn neon-btn-primary px-4 py-2 text-xs">Log Trade</button>`;
+            const resetBtn = (label, cls) => `<button onclick="confirmResetRun()" class="neon-btn ${cls} text-white px-4 py-2 text-xs">${label}</button>`;
+
+            if (m.breached) {
+                textEl.innerHTML = `<strong class="text-rose-700">Account safety limit breached on ${fmtD(m.endDate)}.</strong> Your balance hit the floor of ${usd(m.eodThreshold)}. Trades logged after that date are kept but not counted. If a trade was entered wrong, delete it in the Journal. Otherwise archive this run and start fresh at $50,000.`;
+                actionEl.innerHTML = resetBtn('Archive & Start New Run', 'bg-rose-500 hover:bg-rose-600');
+            } else if (m.stageNum === 1) {
+                const missing = [];
+                if (m.balance < 53000) missing.push(`make ${usd(53000 - m.balance)} more profit`);
+                if (m.consistencyPct > 50) missing.push(`dilute your biggest winning day (currently ${m.consistencyPct.toFixed(1)}%, must be 50% or less, reaching $53K above 50% BLOWS the account)`);
+                textEl.innerHTML = `You are in <strong>Stage 1 (Evaluation)</strong>. To pass, ${missing.join(' and ') || 'keep going'}. The pass is checked at the end of each trading day and moves you to Funded automatically.`;
+                actionEl.innerHTML = logBtn;
+            } else if (m.complete) {
+                textEl.innerHTML = `🏆 <strong>BATTLE PASS CHAMPION!</strong> You claimed all 5 payouts (${usd(m.paidUsd)} USD to you) and qualified for Lucid Live Review. Archive this run to start a new one.`;
+                actionEl.innerHTML = resetBtn('Archive & Start New Run', 'bg-indigo-500 hover:bg-indigo-600');
+            } else {
+                const n = m.payN + 1;
+                if (m.canPay) {
+                    textEl.innerHTML = `<strong>Payout #${n} is ready!</strong> You have 5 green days and can request up to <strong>${usd(m.maxPayout)}</strong> (90% is yours).`;
+                    actionEl.innerHTML = `<button onclick="openPayoutModal()" class="neon-btn bg-amber-300 hover:bg-amber-400 text-amber-950 px-4 py-2 text-xs glow-pulse">Request Payout #${n}</button>`;
+                } else {
+                    let extra = '';
+                    if (m.greenDays >= 5 && m.maxPayout < 500) extra = ' You have the green days, but profit must reach $1,000 before the $500 minimum payout works.';
+                    textEl.innerHTML = `You are in <strong>${m.stageNum === 3 ? 'Stage 3 (final payout)' : 'Funded Mode'}</strong>. You have <strong>${m.greenDays} / 5</strong> green days (+$150 or more each) for payout #${n}.${extra}`;
+                    actionEl.innerHTML = logBtn;
+                }
+            }
+        }
+
+        function renderRoadmap(m) {
+            const stage = m.stageNum;
+            for (let i = 1; i <= 4; i++) {
+                const el = document.getElementById(`roadStage${i}`);
+                const badge = document.getElementById(`roadBadge${i}`);
+                if (!el || !badge) continue;
+                const mk = (box, tag, text) => {
+                    el.className = 'p-3 rounded-2xl border text-center relative ' + box;
+                    badge.className = 'mt-2 inline-block text-[10px] px-2 py-0.5 rounded-full font-bold ' + tag;
+                    badge.innerText = text;
+                };
+                if (m.breached && i === stage) mk('bg-rose-50 border-rose-300', 'bg-rose-200 text-rose-800', 'Breached');
+                else if (m.breached && i > stage) mk('bg-stone-50 border-stone-200 opacity-60', 'bg-stone-200 text-slate-600', 'Locked');
+                else if (m.complete && i === 4) mk('bg-amber-50 border-amber-300 shadow-sm', 'bg-amber-200 text-amber-900', 'Won 🏆');
+                else if (i < stage) mk('bg-emerald-50 border-emerald-200', 'bg-emerald-200 text-emerald-800', 'Completed ✓');
+                else if (i === stage) mk('bg-butter-50 border-amber-300 shadow-sm', 'bg-amber-200 text-amber-900', 'Active Stage');
+                else mk('bg-stone-50 border-stone-200 opacity-60', 'bg-stone-200 text-slate-600', 'Locked');
+            }
+            document.getElementById('roadmapStageNum').innerText = stage;
+        }
+
+        function renderGreenDayDots(m) {
+            const container = document.getElementById('greenDayDots');
+            let html = '';
+            for (let i = 0; i < 5; i++) {
+                if (m.greens[i]) {
+                    html += `<div class="flex-1 text-center py-2 bg-emerald-200 border border-emerald-300 rounded-xl text-emerald-900 font-bold text-xs shadow-xs">${fmtD(m.greens[i]).replace(/ \d{4}$/, '')} 🍃</div>`;
+                } else {
+                    html += `<div class="flex-1 text-center py-2 bg-stone-100 border border-stone-200 rounded-xl text-stone-400 font-semibold text-xs">Day ${i + 1}</div>`;
+                }
+            }
+            container.innerHTML = html;
+            document.getElementById('greenDaysRatio').innerText = m.funded ? `${m.greenDays} / 5` : 'After funded';
+        }
+
+        function updateTradeHint() {
+            const el = document.getElementById('tradeDateHint');
+            const sizeEl = document.getElementById('tradeSizeHint');
+            const d = document.getElementById('tradeDate').value;
+            const sym = document.getElementById('tradeSymbol').value;
+            const micros = tradeMicros();
+            const cap = d ? replay(d, true).maxMicros : replay().maxMicros;
+            const over = micros > cap;
+            sizeEl.className = 'text-[11px] font-semibold -mt-1 ' + (over ? 'text-rose-500' : 'text-slate-500');
+            sizeEl.innerHTML = `${micros} micros = ${micros / 10} minis • ${unitsText(sym, micros).replace(/^\d+ micros /, '')}<br>Stage cap on this date: <strong>${cap} micros / ${cap / 10} minis</strong> (${unitsText(sym, cap)})${over ? '<br>⚠ OVER CAP — saving this trade BLOWS the account and resets to Stage 1.' : ''}`;
+            if (!d) { el.innerText = ''; return; }
+            const pnl = parseFloat(document.getElementById('tradePnLUsd').value) || 0;
+            const existing = (appState.activeRun.trades || []).filter(t => t.date === d).reduce((a, t) => a + t.pnl, 0);
+            const total = existing + pnl;
+            const dll = appState.settings.dailyLossLimit;
+            el.innerHTML = `${fmtD(d)} total with this trade: <strong class="${total >= 0 ? 'text-emerald-700' : 'text-rose-600'}">${usd(total)}</strong>${total >= 150 ? ' 🍃 green day' : ''}${total <= -dll ? ` <strong class="text-rose-500">⚠ breaches the ${usd(dll)} daily loss limit</strong>` : ''}`;
+        }
+
+        function openLogTradeModal() {
+            const sel = document.getElementById('tradeSymbol');
+            if (!sel.options.length) sel.innerHTML = Object.entries(appState.settings.assets).map(([k, a]) => `<option value="${k}">${k} - ${a.name}</option>`).join('');
+            document.getElementById('tradeDate').value = lastLogDate || todayNZ();
+            updateTradeHint();
+            document.getElementById('modalLogTrade').classList.remove('hidden');
+        }
+
+        function saveLoggedTrade() {
+            const date = document.getElementById('tradeDate').value;
+            if (!date) { toast('Pick a trade date first.'); return; }
+            const micros = tradeMicros();
+            if (micros < 1) { toast('Position size must be at least 1 micro.'); return; }
+            const before = replay().phase;
+            appState.activeRun.trades.push({
+                id: Date.now() + Math.random(),
+                date,
+                symbol: document.getElementById('tradeSymbol').value,
+                side: document.getElementById('tradeSide').value,
+                contracts: micros,
+                sizeUnit: document.getElementById('tradeSizeUnit').value,
+                pnl: parseFloat(document.getElementById('tradePnLUsd').value) || 0,
+                emotion: document.getElementById('tradeEmotion').value,
+                followed: document.getElementById('tradeFollowedRules').checked,
+                notes: document.getElementById('tradeNotes').value || ''
+            });
+            lastLogDate = date;
+            document.getElementById('tradeNotes').value = '';
+            closeLogTradeModal();
+            if (saveState()) return;
+            const after = replay().phase;
+            if (before !== after) {
+                if (after === 'FUNDED') toast('🎉 Evaluation passed! You are now on a fresh $50,000 funded account.');
+                else if (after === 'COMPLETE') toast('🏆 Battle pass complete!');
+            } else toast('Trade saved for ' + fmtD(date) + '.');
+        }
+
+        function deleteTrade(tradeId) {
+            appState.activeRun.trades = appState.activeRun.trades.filter(t => t.id !== tradeId);
+            saveState();
+        }
+
+        function deletePayout(id) {
+            appState.activeRun.payouts = appState.activeRun.payouts.filter(p => p.id !== id);
+            saveState();
+        }
+
+        function renderJournalTable() {
+            const tbody = document.getElementById('journalTableBody');
+            const empty = document.getElementById('emptyJournalState');
+            const run = appState.activeRun;
+            const trades = run.trades || [];
+            const m = replay();
+
+            document.getElementById('journalCountBadge').innerText = `${trades.length} Trades`;
+
+            // Payout history
+            const card = document.getElementById('payoutHistoryCard');
+            const pays = [...(run.payouts || [])].sort((a, b) => a.date.localeCompare(b.date));
+            card.classList.toggle('hidden', pays.length === 0);
+            document.getElementById('payoutCountBadge').innerText = `${m.payN} / 5 counted`;
+            document.getElementById('payoutTableBody').innerHTML = pays.map(p => `
+                <tr class="hover:bg-stone-50">
+                    <td class="p-3 font-semibold">${fmtD(p.date)}</td>
+                    <td class="p-3 font-bold">${usd(p.gross)}</td>
+                    <td class="p-3 font-bold text-emerald-600">${usd(p.gross * 0.9)}</td>
+                    <td class="p-3 font-bold text-teal-700">${usd(p.gross * 0.9 * p.fx)} NZD</td>
+                    <td class="p-3">${m.ignored.has(p.id) ? '<span class="stage-tag bg-stone-200 text-slate-600">Not counted</span>' : '<span class="stage-tag bg-emerald-100 text-emerald-800">Counted</span>'}</td>
+                    <td class="p-3 text-right"><button onclick="deletePayout(${p.id})" aria-label="Delete payout" class="text-rose-400 hover:text-rose-600 font-bold">🗑</button></td>
+                </tr>`).join('');
+
+            if (trades.length === 0) {
+                tbody.innerHTML = '';
+                empty.classList.remove('hidden');
+                document.getElementById('jStatTotal').innerText = '0';
+                document.getElementById('jStatWinRate').innerText = '0%';
+                document.getElementById('jStatNetPnL').innerText = '$0.00';
+                document.getElementById('jStatProfitFactor').innerText = '0.00';
+                return;
+            }
+            empty.classList.add('hidden');
+
+            const wins = trades.filter(t => t.pnl > 0);
+            const losses = trades.filter(t => t.pnl < 0);
+            const totalPnL = trades.reduce((a, b) => a + b.pnl, 0);
+            const grossWin = wins.reduce((a, b) => a + b.pnl, 0);
+            const grossLoss = Math.abs(losses.reduce((a, b) => a + b.pnl, 0));
+            const profitFactor = grossLoss > 0 ? (grossWin / grossLoss) : grossWin > 0 ? 99.9 : 0;
+            document.getElementById('jStatTotal').innerText = trades.length;
+            document.getElementById('jStatWinRate').innerText = `${((wins.length / trades.length) * 100).toFixed(0)}%`;
+            document.getElementById('jStatNetPnL').innerText = `${totalPnL >= 0 ? '+' : ''}${usd(totalPnL)}`;
+            document.getElementById('jStatProfitFactor').innerText = profitFactor.toFixed(2);
+
+            const sorted = [...trades].sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id);
+            tbody.innerHTML = sorted.map(t => {
+                const notCounted = m.ignored.has(t.id);
+                const funded = m.tradePhase[t.id] === 'FUNDED';
+                const status = notCounted ? '<span class="stage-tag bg-stone-200 text-slate-600">Not counted</span>'
+                    : funded ? '<span class="stage-tag bg-emerald-100 text-emerald-800">Funded</span>'
+                    : '<span class="stage-tag bg-butter-100 text-amber-800">Eval</span>';
+                const note = t.notes ? (t.notes.length > 24 ? t.notes.substring(0, 24) + '...' : t.notes) : '--';
+                return `
+                    <tr class="hover:bg-stone-50 ${notCounted ? 'opacity-60' : ''}">
+                        <td class="p-3 font-semibold text-slate-600">${fmtD(t.date)}</td>
+                        <td class="p-3 font-bold">${t.symbol}</td>
+                        <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${t.side === 'LONG' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${t.side}</span></td>
+                        <td class="p-3">${sizeCell(t)}</td>
+                        <td class="p-3 font-medium text-slate-500">${note.replace(/</g, '&lt;')}</td>
+                        <td class="p-3 font-bold ${t.pnl >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${t.pnl >= 0 ? '+' : ''}${usd(t.pnl)}</td>
+                        <td class="p-3">${t.emotion}</td>
+                        <td class="p-3">${t.followed ? '✅ Yes' : '⚠️ No'}</td>
+                        <td class="p-3">${status}</td>
+                        <td class="p-3 text-right"><button onclick="deleteTrade(${t.id})" aria-label="Delete trade" class="text-rose-400 hover:text-rose-600 font-bold">🗑</button></td>
+                    </tr>`;
+            }).join('');
+        }
+
+        function openPayoutModal() {
+            const run = appState.activeRun;
+            const m = replay();
+            if (!m.funded) { toast('Payouts unlock after you pass the evaluation.'); return; }
+            if (m.breached || m.complete) { toast(m.breached ? 'This run is breached.' : 'All 5 payouts are already claimed.'); return; }
+            const dates = [...(run.trades || []).map(t => t.date), ...(run.payouts || []).map(p => p.date)].sort();
+            const d = dates.length ? dates[dates.length - 1] : todayNZ();
+            document.getElementById('payoutDate').value = d;
+            const mm = replay(d);
+            document.getElementById('payoutAmountUsd').value = mm.maxPayout >= 500 ? mm.maxPayout : 500;
+            updatePayoutCalc();
+            document.getElementById('modalPayout').classList.remove('hidden');
+        }
+
+        function updatePayoutCalc() {
+            const d = document.getElementById('payoutDate').value || todayNZ();
+            const grossUsd = parseFloat(document.getElementById('payoutAmountUsd').value) || 0;
+            const m = replay(d);
+            document.getElementById('payoutAvailableUsd').value = `${usd(Math.max(0, m.profit))} USD (max request ${usd(m.maxPayout)})`;
+            document.getElementById('payoutUserUsd').innerText = `${usd(grossUsd * 0.90)} USD`;
+            document.getElementById('payoutLucidUsd').innerText = `${usd(grossUsd * 0.10)} USD`;
+            document.getElementById('payoutUserNzd').innerText = `${usd(grossUsd * 0.90 * appState.exchangeRate)} NZD`;
+            const problem = payoutProblem(d, grossUsd);
+            const warn = document.getElementById('payoutWarn');
+            warn.innerText = problem;
+            warn.classList.toggle('hidden', !problem);
+            const btn = document.getElementById('btnConfirmPayout');
+            btn.disabled = !!problem;
+            btn.classList.toggle('opacity-50', !!problem);
+            btn.classList.toggle('cursor-not-allowed', !!problem);
+        }
+
+        function submitPayoutRequest() {
+            const d = document.getElementById('payoutDate').value || todayNZ();
+            const gross = parseFloat(document.getElementById('payoutAmountUsd').value) || 0;
+            if (payoutProblem(d, gross)) { updatePayoutCalc(); return; }
+            const before = replay().phase;
+            appState.activeRun.payouts.push({ id: Date.now() + Math.random(), date: d, gross, fx: appState.exchangeRate });
+            saveState();
+            closePayoutModal();
+            const m = replay();
+            toast(m.complete ? '🏆 Payout #5 claimed. Battle pass complete!' : `🎉 Payout #${m.payN} recorded: ${usd(gross * 0.9 * appState.exchangeRate)} NZD to you.`);
+        }
+
+        function confirmResetRun() {
+            if (!confirm("Archive this run and start a new one at $50,000? The finished run is saved in your Career tab.")) return;
+            const m = replay();
+            archiveRun(m.complete ? 'passed' : 'manual_reset', m, null);
+            saveState();
+        }
+
+        function renderCareerSection() {
+            const history = appState.careerHistory || [];
+            const m = replay();
+            const run = appState.activeRun;
+            const activeNzd = (run.payouts || []).reduce((a, p) => m.ignored.has(p.id) ? a : a + p.gross * 0.9 * p.fx, 0);
+            const totalPayoutsUsd = history.reduce((a, b) => a + (b.payoutsUsd || 0), 0) + m.paidUsd;
+            const totalPayoutsNzd = history.reduce((a, b) => a + (b.payoutsNzd || 0), 0) + activeNzd;
+            const cnt = o => history.filter(h => h.outcome === o).length;
+            const passed = cnt('passed'), failed = cnt('failed'), resets = cnt('manual_reset');
+            const stageNames = ['Evaluation', 'Funded 1-4', '5th Payout', 'Live Review'];
+            const best = Math.max(m.stageNum, ...history.map(h => h.finalStage || 1));
+
+            document.getElementById('cStatTotalRuns').innerText = history.length + 1;
+            document.getElementById('cStatTotalUsd').innerText = usd(totalPayoutsUsd);
+            document.getElementById('cStatTotalNzd').innerText = usd(totalPayoutsNzd);
+            document.getElementById('cStatBestStage').innerText = stageNames[best - 1];
+            document.getElementById('cStatWinRate').innerText = history.length ? `${((passed / history.length) * 100).toFixed(0)}%` : '—';
+            document.getElementById('cStatWinSub').innerText = `${passed} passed / ${failed} failed / ${resets} reset`;
+
+            const labels = { passed: ['PASSED 🏆', 'bg-emerald-100 text-emerald-800'], failed: ['FAILED 💔', 'bg-rose-100 text-rose-800'], manual_reset: ['RESET', 'bg-stone-200 text-slate-700'] };
+            const tbody = document.getElementById('careerTableBody');
+            const empty = document.getElementById('emptyCareerState');
+            if (history.length === 0) {
+                tbody.innerHTML = '';
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                tbody.innerHTML = [...history].reverse().map(h => {
+                    const [lbl, cls] = labels[h.outcome] || labels.manual_reset;
+                    return `
+                    <tr class="hover:bg-stone-50" data-testid="career-row-${h.runNum}">
+                        <td class="p-3 font-bold">Run #${h.runNum}</td>
+                        <td class="p-3"><span data-testid="career-outcome-${h.runNum}" class="px-2 py-0.5 rounded-full text-[10px] font-bold ${cls}">${lbl}</span>${h.blownReason ? `<div class="text-[10px] text-rose-400 mt-1 max-w-[260px]" data-testid="career-reason-${h.runNum}">${h.blownReason}</div>` : ''}</td>
+                        <td class="p-3 font-semibold">Stage ${h.finalStage}</td>
+                        <td class="p-3 font-bold num">${usd(h.finalBalance)}</td>
+                        <td class="p-3 font-bold text-emerald-600 num">${usd(h.payoutsUsd)}</td>
+                        <td class="p-3 font-bold text-teal-700 num">${usd(h.payoutsNzd)}</td>
+                        <td class="p-3 text-slate-500">${h.dateEnded}</td>
+                        <td class="p-3 text-right"><button onclick="openDeleteRunModal(${h.runNum})" data-testid="delete-run-btn-${h.runNum}" aria-label="Delete run" class="text-rose-400 hover:text-rose-600 font-bold">🗑</button></td>
+                    </tr>`;
+                }).join('');
+            }
+            renderBadges();
+        }
+
+        function renderBadges() {
+            const held = new Set(earnedBadgeIds(replay()));
+            (appState.careerHistory || []).forEach(h => (h.badgesEarned || []).forEach(id => held.add(id)));
+            let html = '', count = 0;
+            BADGES.forEach(b => {
+                const unlocked = held.has(b.id);
+                if (unlocked) count++;
+                html += `
+                    <div data-testid="badge-${b.id}" data-unlocked="${unlocked}" class="p-3 rounded-2xl border text-center space-y-1 ${unlocked ? 'bg-amber-50 border-amber-400 neon-stage' : 'bg-stone-50 border-stone-200 opacity-40'}">
+                        <div class="text-2xl">${b.icon}</div>
+                        <div class="font-bold text-xs text-slate-800">${b.title}</div>
+                        <div class="text-[10px] text-slate-500">${b.desc}</div>
+                    </div>`;
+            });
+            document.getElementById('badgesGrid').innerHTML = html;
+            document.getElementById('badgeUnlockedCount').innerText = `${count} / ${BADGES.length} Unlocked`;
+        }
+
+        function startNzClock() {
+            function updateClock() {
+                const now = new Date();
+                
+                // Convert current time to US Eastern
+                const usEasternStr = now.toLocaleString("en-US", { timeZone: "America/New_York" });
+                const usEasternDate = new Date(usEasternStr);
+
+                // Set market close today at 4:45 PM ET
+                let cutoffEt = new Date(usEasternDate);
+                cutoffEt.setHours(16, 45, 0, 0);
+
+                if (usEasternDate > cutoffEt) {
+                    cutoffEt.setDate(cutoffEt.getDate() + 1); // Move to next day
+                }
+
+                // Calculate NZ Local Time equivalent
+                const nzTimeFormatter = new Intl.DateTimeFormat('en-NZ', {
+                    timeZone: 'Pacific/Auckland',
+                    weekday: 'short',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true
+                });
+
+                const nzCutoffStr = nzTimeFormatter.format(cutoffEt);
+                document.getElementById('nzCutoffTime').innerText = nzCutoffStr;
+
+                // Time remaining calculation
+                const diffMs = cutoffEt - usEasternDate;
+                const hours = Math.floor(diffMs / (1000 * 60 * 60));
+                const mins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById('nzCountdownText').innerText = `${hours}h ${mins}m remaining until market pause`;
+            }
+
+            updateClock();
+            setInterval(updateClock, 30000); // update every 30s
+        }
+
+        function runCalculator() {
+            const sel = document.getElementById('calcSymbol');
+            const assets = appState.settings.assets;
+            if (!sel.options.length) sel.innerHTML = Object.entries(assets).map(([k, a]) => `<option value="${k}">${k} - ${a.name} ($${a.tickVal}/tick, ${a.tickSize} tick)</option>`).join('');
+            const symbol = sel.value;
+            const riskUsd = parseFloat(document.getElementById('calcRiskUsd').value) || 200;
+            const entry = parseFloat(document.getElementById('calcEntryPrice').value) || 5000;
+            const stop = parseFloat(document.getElementById('calcStopPrice').value) || 4990;
+            const specs = assets[symbol];
+
+            const pointDiff = Math.abs(entry - stop);
+            const tickDiff = pointDiff / specs.tickSize;
+            const riskPerMicro = tickDiff * specs.tickVal;
+
+            let safeMicros = riskPerMicro > 0 ? Math.floor(riskUsd / riskPerMicro) : 0;
+            safeMicros = Math.max(1, safeMicros);
+
+            const m = calculateMetrics();
+            const cappedMicros = Math.min(safeMicros, m.maxMicros);
+            const totalActualRisk = cappedMicros * riskPerMicro;
+
+            document.getElementById('calcCurrentCapBadge').innerText = `${m.maxMicros} Micros / ${m.maxMinis} Minis`;
+            document.getElementById('calcCapUnits').innerText = `Cap in units: ${unitsText(symbol, m.maxMicros)}`;
+            document.getElementById('calcResultMicros').innerText = cappedMicros;
+            document.getElementById('calcResultMinis').innerText = `Or max ${(cappedMicros / 10).toFixed(1)} Minis`;
+            document.getElementById('calcResultUnits').innerText = unitsText(symbol, cappedMicros);
+            document.getElementById('calcResultPoints').innerText = `${pointDiff.toFixed(2)} pts (${tickDiff.toFixed(0)} ticks)`;
+            document.getElementById('calcResultRiskPerMicro').innerText = `$${riskPerMicro.toFixed(2)} USD`;
+            document.getElementById('calcResultTotalRisk').innerText = `$${totalActualRisk.toFixed(2)} USD`;
+
+            document.getElementById('calcRecommendationBox').innerText = `💡 Plain English Advice: Trading ${cappedMicros} Micro contract(s) on ${symbol} (${unitsText(symbol, cappedMicros)}) with a ${pointDiff.toFixed(2)} pt stop loss risks exactly $${totalActualRisk.toFixed(2)} USD.`;
+        }
+
+        
+        function closeLogTradeModal() {
+            document.getElementById('modalLogTrade').classList.add('hidden');
+        }
+
+        
+
+        
+
+        
+
+        
+
+        function closePayoutModal() {
+            document.getElementById('modalPayout').classList.add('hidden');
+        }
+
+        
+
+        
+
+        
+
+        
+
+        function setDictCategory(cat) {
+            activeDictCategory = cat;
+            renderDictPills();
+            renderDictionary();
+        }
+
+        function filterDictionary() {
+            renderDictionary();
+        }
+
+        function renderDictionary() {
+            const grid = document.getElementById('dictionaryGrid');
+            const search = document.getElementById('dictSearch').value.toLowerCase();
+
+            const filtered = dictionaryTerms.filter(item => {
+                const matchCat = activeDictCategory === 'ALL' || item.category === activeDictCategory;
+                const matchSearch = item.term.toLowerCase().includes(search) || item.simple.toLowerCase().includes(search);
+                return matchCat && matchSearch;
+            });
+
+            let html = '';
+            filtered.forEach(item => {
+                html += `
+                    <div class="neon-card p-4 space-y-2 bg-white/90 border-stone-200">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
+                                <span>${item.icon}</span> ${item.term}
+                            </span>
+                            <span class="text-[10px] bg-stone-100 text-slate-600 font-bold px-2 py-0.5 rounded-full border border-stone-200">${item.category}</span>
+                        </div>
+                        <div class="bg-mint-50/80 p-2.5 rounded-xl border border-mint-100 text-xs text-slate-700">
+                            <strong class="text-emerald-900 font-bold">In Simple Terms:</strong> ${item.simple}
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed"><strong class="text-slate-700">Why it matters:</strong> ${item.why}</p>
+                        <p class="text-[11px] text-slate-500 italic">e.g., ${item.example}</p>
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        function renderRulesList() {
+            const container = document.getElementById('rulesContainer');
+            let html = '';
+            appState.personalRules.forEach((rule, idx) => {
+                html += `
+                    <div class="neon-card p-3.5 flex items-center justify-between gap-3 ${rule.isLucid ? 'bg-rose-50/50 border-rose-200' : 'bg-white border-stone-200'}">
+                        <div class="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                            <span>${rule.isLucid ? '🩷' : '🎀'}</span>
+                            <span>${rule.text}</span>
+                        </div>
+                        ${!rule.isLucid ? `<button onclick="deletePersonalRule(${rule.id})" class="text-slate-400 hover:text-rose-600 text-xs font-bold">&times;</button>` : '<span class="text-[10px] font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded-full">Lucid Rule</span>'}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function addPersonalRule() {
+            const input = document.getElementById('newRuleText');
+            if (!input.value.trim()) return;
+
+            appState.personalRules.push({
+                id: Date.now(),
+                text: input.value.trim(),
+                isLucid: false
+            });
+            input.value = '';
+            saveState();
+        }
+
+        function deletePersonalRule(id) {
+            appState.personalRules = appState.personalRules.filter(r => r.id !== id);
+            saveState();
+        }
+
+        
+
+        
+
+        function toggleBeginnerMode() {
+            appState.beginnerMode = !appState.beginnerMode;
+            saveState();
+        }
+
+        function openExchangeModal() {
+            document.getElementById('inputFxRate').value = appState.exchangeRate;
+            document.getElementById('modalFx').classList.remove('hidden');
+        }
+        function closeExchangeModal() {
+            document.getElementById('modalFx').classList.add('hidden');
+        }
+        function saveExchangeRate() {
+            const val = parseFloat(document.getElementById('inputFxRate').value) || 1.70;
+            appState.exchangeRate = val;
+            saveState();
+            closeExchangeModal();
+        }
+    </script>
+<div id="toast" data-testid="toast" class="fixed left-1/2 -translate-x-1/2 bottom-6 z-[70] hidden max-w-sm w-[90%] bg-stone-100 text-slate-800 border border-amber-400 text-xs font-bold px-4 py-3 rounded-2xl shadow-lg text-center" role="status"></div>
+</body>
+</html>

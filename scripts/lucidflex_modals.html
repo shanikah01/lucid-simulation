@@ -1,0 +1,23 @@
+    <!-- MODAL 4: ACCOUNT BLOWN -->
+    <div id="modalBlown" data-testid="blown-modal" class="fixed inset-0 neon-backdrop z-[65] flex items-center justify-center p-4 hidden">
+        <div class="neon-card w-full max-w-md p-6 space-y-4" style="border-color:#f43f5e;box-shadow:0 0 44px -10px rgba(244,63,94,0.7)">
+            <div class="text-[11px] font-bold tracking-[0.25em] text-rose-500">HARD RULE BROKEN</div>
+            <h3 class="text-2xl font-bold text-slate-800">Account blown</h3>
+            <p id="blownModalText" data-testid="blown-modal-text" class="text-sm text-slate-700 leading-relaxed"></p>
+            <p id="blownModalSub" data-testid="blown-modal-sub" class="text-xs text-slate-500"></p>
+            <button onclick="closeBlownModal()" data-testid="blown-modal-ack-btn" class="w-full neon-btn neon-btn-primary py-2.5 text-sm">Restart at Stage 1</button>
+        </div>
+    </div>
+
+    <!-- MODAL 5: DELETE ARCHIVED RUN -->
+    <div id="modalDeleteRun" data-testid="delete-run-modal" class="fixed inset-0 neon-backdrop z-[60] flex items-center justify-center p-4 hidden">
+        <div class="neon-card w-full max-w-md p-6 space-y-4">
+            <h3 id="deleteRunTitle" class="text-lg font-bold text-slate-800"></h3>
+            <p id="deleteRunText" data-testid="delete-run-text" class="text-sm text-slate-700 leading-relaxed"></p>
+            <div class="flex gap-2 pt-1">
+                <button onclick="closeDeleteRunModal()" data-testid="delete-run-cancel-btn" class="w-1/2 py-2.5 rounded-xl border border-stone-200 text-slate-600 font-bold text-xs hover:bg-stone-100">Cancel</button>
+                <button onclick="confirmDeleteRun()" data-testid="delete-run-confirm-btn" class="w-1/2 neon-btn neon-btn-danger py-2.5 text-xs">Delete Forever</button>
+            </div>
+        </div>
+    </div>
+
