@@ -903,7 +903,7 @@
                 </div>
 
                 <!-- Contracts & Net PnL USD -->
-                <div class="grid grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-bold text-slate-600 mb-1">Position Size</label>
                         <div class="flex gap-2">
@@ -1107,7 +1107,7 @@
             { term: 'Stop-Limit Order', category: 'ORDER TYPES', icon: '<i data-lucide="brick-wall" class="lf-ic"></i>', simple: 'A stop that turns into a limit order instead of a market order.', why: 'Avoids bad fills, but can skip right past you in a fast move and leave you unprotected.', example: 'Stop 4,990, limit 4,989: will not sell below 4,989.' },
             { term: 'Bracket Order (OCO)', category: 'ORDER TYPES', icon: '<i data-lucide="link" class="lf-ic"></i>', simple: 'An entry with an attached stop loss and profit target; one cancels the other.', why: 'Your risk and reward are set before emotions kick in.', example: 'Entry 5,000, target 5,020, stop 4,990.' },
             { term: 'Stop Loss', category: 'RISK', icon: '<i data-lucide="shield-alert" class="lf-ic"></i>', simple: 'The pre-planned price where you admit you are wrong and exit.', why: 'Without one, a single trade can blow the EOD drawdown.', example: 'Risking $5 on 4 MGC micros (40 XAUUSD units) = $200 max loss.' },
-            { term: 'Position Sizing', category: 'RISK', icon: '<i data-lucide="ruler-dimension-line" class="lf-ic"></i>', simple: 'Choosing how many contracts to trade based on risk, not feelings.', why: 'Keeps each loss small and inside the stage cap. Over the cap = blown.', example: 'Risk $200 / $50 per micro = 4 micros.' },
+            { term: 'Position Sizing', category: 'RISK', icon: '<i data-lucide="ruler" class="lf-ic"></i>', simple: 'Choosing how many contracts to trade based on risk, not feelings.', why: 'Keeps each loss small and inside the stage cap. Over the cap = blown.', example: 'Risk $200 / $50 per micro = 4 micros.' },
             { term: 'Max Drawdown', category: 'RISK', icon: '<i data-lucide="trending-down" class="lf-ic"></i>', simple: 'The biggest drop from a peak balance to a low point.', why: 'Prop firms fail accounts when drawdown passes a set limit.', example: 'Peak $51,500 down to $50,000 = $1,500 drawdown.' },
             { term: 'Mini Contract', category: 'CONTRACTS', icon: '<i data-lucide="package" class="lf-ic"></i>', simple: 'The full-size standard futures contract. 1 mini = 10 micros.', why: 'Caps are listed in both: 40 micros equals 4 minis.', example: '1 GC mini = 10 MGC micros = 100 oz gold.' },
             { term: 'Contract Multiplier', category: 'CONTRACTS', icon: '<i data-lucide="x" class="lf-ic"></i>', simple: 'Dollar value of a 1-point move for one contract.', why: 'Tells you how fast P&L moves per point.', example: 'MGC = $10 per $1 move in gold; MCL = $100 per $1 move in oil.' },
@@ -1118,7 +1118,7 @@
             { term: 'VWAP', category: 'ANALYSIS', icon: '<i data-lucide="activity" class="lf-ic"></i>', simple: 'Volume-Weighted Average Price for the session.', why: 'Institutions benchmark fills to it; price often reacts around it.', example: 'Longs above VWAP, shorts below it as a simple bias.' },
             { term: 'Moving Average', category: 'ANALYSIS', icon: '<i data-lucide="trending-up" class="lf-ic"></i>', simple: 'The average closing price over the last N bars, drawn as a line.', why: 'Smooths noise and shows the trend direction.', example: '20 EMA sloping up = short-term uptrend.' },
             { term: 'ATR (Average True Range)', category: 'ANALYSIS', icon: '<i data-lucide="waves" class="lf-ic"></i>', simple: 'How far price typically moves per bar.', why: 'Sets realistic stop distances so noise does not stop you out.', example: 'ATR $3 on MGC 5-min: a $1 stop is too tight.' },
-            { term: 'Bid-Ask Spread', category: 'MARKET STRUCTURE', icon: '↔️', simple: 'The gap between the best buy price and best sell price.', why: 'It is a hidden cost on every market order.', example: 'Bid 2,350.0 / Ask 2,350.1 on MGC = 1 tick spread.' },
+            { term: 'Bid-Ask Spread', category: 'MARKET STRUCTURE', icon: '<i data-lucide="arrow-left-right" class="lf-ic"></i>', simple: 'The gap between the best buy price and best sell price.', why: 'It is a hidden cost on every market order.', example: 'Bid 2,350.0 / Ask 2,350.1 on MGC = 1 tick spread.' },
             { term: 'Liquidity', category: 'MARKET STRUCTURE', icon: '<i data-lucide="droplet" class="lf-ic"></i>', simple: 'How easily you can trade without moving the price.', why: 'Thin markets mean slippage and surprise fills.', example: 'Gold during the NY open is very liquid; late Asia session is thin.' },
             { term: 'Higher Highs / Higher Lows', category: 'MARKET STRUCTURE', icon: '<i data-lucide="layers" class="lf-ic"></i>', simple: 'An uptrend makes each swing high and low above the last.', why: 'Breaking the pattern warns the trend may be ending.', example: 'Gold lows at 2,330 → 2,340 → 2,350 = higher lows.' },
             { term: 'TICK', category: 'FUTURES', icon: '<i data-lucide="ruler" class="lf-ic"></i>', simple: 'Duplicate casing test entry.', why: 'Should be deduped.', example: '-' },
