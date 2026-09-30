@@ -1918,10 +1918,11 @@
             const cappedMicros = Math.min(safeMicros, m.maxMicros);
             const totalActualRisk = cappedMicros * riskPerMicro;
 
-            document.getElementById('calcCurrentCapBadge').innerText = `${m.maxMicros} Micros / ${m.maxMinis} Minis`;
+            const cfdU = n => specs.unitsPerMicro ? ` or ${(n * specs.unitsPerMicro).toLocaleString('en-US')} ${specs.cfd} units` : '';
+            document.getElementById('calcCurrentCapBadge').innerText = `${m.maxMicros} Micros / ${m.maxMinis} Minis${cfdU(m.maxMicros)}`;
             document.getElementById('calcCapUnits').innerText = `Cap in units: ${unitsText(symbol, m.maxMicros)}`;
             document.getElementById('calcResultMicros').innerText = cappedMicros;
-            document.getElementById('calcResultMinis').innerText = `Or max ${(cappedMicros / 10).toFixed(1)} Minis`;
+            document.getElementById('calcResultMinis').innerText = `Or max ${(cappedMicros / 10).toFixed(1)} Minis${cfdU(cappedMicros)}`;
             document.getElementById('calcResultUnits').innerText = unitsText(symbol, cappedMicros);
             document.getElementById('calcResultPoints').innerText = `${pointDiff.toFixed(2)} pts (${tickDiff.toFixed(0)} ticks)`;
             document.getElementById('calcResultRiskPerMicro').innerText = `$${riskPerMicro.toFixed(2)} USD`;
