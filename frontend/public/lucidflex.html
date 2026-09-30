@@ -585,11 +585,11 @@
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-slate-600 mb-1">Entry Price</label>
-                            <input type="number" id="calcEntryPrice" value="5000.00" step="0.25" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
+                            <input type="number" id="calcEntryPrice" value="2350.00" step="0.01" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-slate-600 mb-1">Stop Loss Price</label>
-                            <input type="number" id="calcStopPrice" value="4990.00" step="0.25" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
+                            <input type="number" id="calcStopPrice" value="2345.00" step="0.01" oninput="runCalculator()" class="w-full p-2.5 rounded-xl border border-stone-200 bg-white font-bold text-slate-800 text-sm">
                         </div>
                     </div>
 
@@ -1059,8 +1059,6 @@
                 dailyLossLimit: 1000.00,
                 // Unit conversion table (source of truth for Calculator + Journal). Rules use micros/minis only.
                 assets: {
-                    MES: { name: 'Micro E-mini S&P 500', mini: 'ES', tickSize: 0.25, tickVal: 1.25, unitsPerMicro: null, unit: '' },
-                    MNQ: { name: 'Micro E-mini Nasdaq', mini: 'NQ', tickSize: 0.25, tickVal: 0.50, unitsPerMicro: null, unit: '' },
                     MGC: { name: 'Micro Gold', mini: 'GC', tickSize: 0.10, tickVal: 1.00, unitsPerMicro: 10, unit: 'oz', cfd: 'XAUUSD' },
                     SIL: { name: 'Micro Silver', mini: 'SI', tickSize: 0.005, tickVal: 5.00, unitsPerMicro: 1000, unit: 'oz', cfd: 'XAGUSD' },
                     MCL: { name: 'Micro Crude Oil', mini: 'CL', tickSize: 0.01, tickVal: 1.00, unitsPerMicro: 100, unit: 'barrels', cfd: 'USOIL/XTIUSD' }
@@ -1903,8 +1901,8 @@
             if (!sel.options.length) sel.innerHTML = Object.entries(assets).map(([k, a]) => `<option value="${k}">${k} - ${a.name} ($${a.tickVal}/tick, ${a.tickSize} tick)</option>`).join('');
             const symbol = sel.value;
             const riskUsd = parseFloat(document.getElementById('calcRiskUsd').value) || 200;
-            const entry = parseFloat(document.getElementById('calcEntryPrice').value) || 5000;
-            const stop = parseFloat(document.getElementById('calcStopPrice').value) || 4990;
+            const entry = parseFloat(document.getElementById('calcEntryPrice').value) || 2350;
+            const stop = parseFloat(document.getElementById('calcStopPrice').value) || 2345;
             const specs = assets[symbol];
 
             const pointDiff = Math.abs(entry - stop);
