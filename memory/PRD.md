@@ -20,6 +20,8 @@ Single-page HTML/JS paper-trading battle pass for LucidFlex $50K. Surgical edits
 - Dictionary: 20 new terms merged, deduped case-insensitively, new category pills
 - Session-dismissible "HARD RULES ARMED" banner on Dashboard + Rules
 
+- How-it-works guide screen: auto-opens on first visit, can be reopened from the header "Guide" button. Covers the TradingView paper-trading workflow in units, the hard rules, levelling/payouts and a daily routine
+
 ## Backlog
 - P1: Editable cap/rule settings panel
 - P2: Export/import career JSON backup

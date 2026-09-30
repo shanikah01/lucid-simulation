@@ -182,6 +182,7 @@
                 </button>
 
                 <!-- Reset Run Button -->
+                <button onclick="openGuide()" data-testid="open-guide-btn" class="neon-badge bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 cursor-pointer transition"><i data-lucide="book-open" class="lf-ic"></i><span>Guide</span></button>
                 <button onclick="confirmResetRun()" class="px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 rounded-xl font-bold flex items-center gap-1.5 transition">
                     <span class="text-xs" aria-hidden="true"><i data-lucide="rotate-ccw" class="lf-ic"></i></span>
                     <span>Reset Run</span>
@@ -1020,6 +1021,18 @@
         </div>
     </div>
 
+    <!-- MODAL 6: GUIDE -->
+    <div id="modalGuide" data-testid="guide-modal" class="fixed inset-0 neon-backdrop z-[62] flex items-center justify-center p-4 hidden">
+        <div class="neon-card w-full max-w-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-start justify-between gap-3">
+                <div><div class="text-[11px] font-bold tracking-[0.25em] text-amber-600">HOW IT WORKS</div><h3 class="text-2xl font-bold text-slate-800">Welcome to the LucidFlex Battle Pass</h3></div>
+                <button onclick="closeGuide()" data-testid="guide-close-x" class="text-slate-400 hover:text-slate-800 text-xl font-bold">&times;</button>
+            </div>
+            <div class="neon-card p-4 space-y-2"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2"><i data-lucide="info" class="lf-ic text-amber-600"></i>What is this?</h4><div class="text-xs text-slate-700 leading-relaxed space-y-1.5"><p>A <strong>practice battle pass</strong> for the LucidFlex $50K account. You paper trade, log every result here, and the app judges you with the real Lucid rules. Break a hard rule and you start again, just like a real prop firm.</p></div></div><div class="neon-card p-4 space-y-2"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2"><i data-lucide="candlestick-chart" class="lf-ic text-amber-600"></i>Using TradingView as your simulator</h4><div class="text-xs text-slate-700 leading-relaxed space-y-1.5"><p>1. In TradingView, open the <strong>Paper Trading</strong> broker (Trading Panel &rarr; Paper Trading) and use a $50,000 balance.</p><p>2. Trade <strong>XAUUSD</strong> (gold), <strong>XAGUSD</strong> (silver) or <strong>USOIL / XTIUSD</strong> (oil). TradingView sizes these in <strong>units</strong>, not contracts.</p><p>3. Before each trade, open the <strong>Position Calculator</strong>. Enter your entry and stop, and it tells you the micros <em>and the matching units</em> to type into TradingView.</p><p>4. Conversions: Gold 1 micro = 10 units &bull; Silver 1 micro = 1,000 units &bull; Oil 1 micro = 100 units. 1 mini = 10 micros.</p><p>5. After you close the trade, click <strong>Log Trade</strong>. Enter the date, market, size in micros (or minis) and the net P&amp;L in USD that TradingView shows.</p><p>6. Close everything before <strong>4:45 PM ET</strong>. The NZ clock on the Dashboard shows when that is.</p></div></div><div class="neon-card p-4 space-y-2"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2"><i data-lucide="shield-alert" class="lf-ic text-amber-600"></i>The hard rules (break one = reset to Stage 1)</h4><div class="text-xs text-slate-700 leading-relaxed space-y-1.5"><p><strong>EOD trailing drawdown:</strong> your safety floor sits $2,000 under your highest end-of-day balance. It locks at $50,100 in Eval and $50,000 when funded. Close a day at or below it and the run is blown.</p><p><strong>Position cap:</strong> Eval 40 micros (400 gold units). Funded: 20 micros until +$1,000 profit, then 30, then 40 from +$2,000. Even 1 micro over = blown.</p><p><strong>50% consistency:</strong> your best day must be 50% or less of your total profit. If you reach the $53K target while one day is over 50%, the run is blown. Keep your wins steady.</p><p><strong>No daily loss limit</strong> (DLL OFF), but a big loss still counts toward the drawdown floor.</p><p>A blown run is saved in <strong>Career</strong> as failed, with the reason, and you restart at $50,000.</p></div></div><div class="neon-card p-4 space-y-2"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2"><i data-lucide="trophy" class="lf-ic text-amber-600"></i>How levelling works</h4><div class="text-xs text-slate-700 leading-relaxed space-y-1.5"><p><strong>Stage 1: Evaluation.</strong> Grow $50,000 to $53,000 while passing the consistency rule. You move up automatically at the end of that day.</p><p><strong>Stage 2: Funded (payouts 1-4).</strong> You get a fresh $50,000. Earn <strong>5 green days</strong> (+$150 or more each) and then request a payout: minimum $500, up to 50% of profit, max $2,000. You keep 90%. The green-day count resets after each payout.</p><p><strong>Stage 3: 5th payout.</strong> One more cycle for the final payout.</p><p><strong>Stage 4: Live Review.</strong> Battle pass won. Archive the run and go again.</p><p>Badges unlock as you hit milestones. Win rate and payouts build up across every run in Career.</p></div></div><div class="neon-card p-4 space-y-2"><h4 class="font-bold text-slate-800 text-sm flex items-center gap-2"><i data-lucide="list-checks" class="lf-ic text-amber-600"></i>Your daily routine</h4><div class="text-xs text-slate-700 leading-relaxed space-y-1.5"><p>Check the cap on the Dashboard &rarr; size your trade in the Calculator &rarr; place it in TradingView in units &rarr; close before the cutoff &rarr; log the result &rarr; read "What do I do next?".</p></div></div>
+            <button onclick="closeGuide()" data-testid="guide-start-btn" class="w-full neon-btn neon-btn-primary py-3 text-sm">Got it, start trading</button>
+        </div>
+    </div>
+
     <!-- MODAL 4: ACCOUNT BLOWN -->
     <div id="modalBlown" data-testid="blown-modal" class="fixed inset-0 neon-backdrop z-[65] flex items-center justify-center p-4 hidden">
         <div class="neon-card w-full max-w-md p-6 space-y-4" style="border-color:#f43f5e;box-shadow:0 0 44px -10px rgba(244,63,94,0.7)">
@@ -1163,6 +1176,7 @@
             loadState();
             startNzClock();
             saveState();
+            if (!localStorage.getItem('lucidflex_guide_seen')) openGuide();
             lucide.createIcons();
         });
 
@@ -1351,6 +1365,8 @@
         }
 
 
+        function openGuide() { document.getElementById('modalGuide').classList.remove('hidden'); }
+        function closeGuide() { localStorage.setItem('lucidflex_guide_seen', '1'); document.getElementById('modalGuide').classList.add('hidden'); }
         function migrateRun(run) {
             run.payouts = run.payouts || [];
             run.trades = (run.trades || []).filter(t => {
