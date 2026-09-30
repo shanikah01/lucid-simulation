@@ -150,7 +150,7 @@
                 <div>
                     <h1 class="text-xl font-bold tracking-tight text-slate-800 flex items-center gap-2">
                         LucidFlex <span class="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">$50K Pass</span>
-                        <span class="text-xs bg-butter-100 text-amber-800 px-2 py-0.5 rounded-full border border-butter-200 font-semibold" id="headerDllBadge" data-testid="header-dll-badge">DLL $1,000</span>
+                        <span class="text-xs bg-butter-100 text-amber-800 px-2 py-0.5 rounded-full border border-butter-200 font-semibold" id="headerDllBadge" data-testid="header-dll-badge">DLL OFF</span>
                     </h1>
                     <p class="text-xs text-slate-500 font-medium">Hardened Paper Trading Battle Pass &amp; Rule Companion</p>
                 </div>
@@ -301,8 +301,8 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-700">
                     <div class="bg-white/80 p-2.5 rounded-xl border border-butter-200">
-                        <span class="font-bold text-amber-800">What is the Daily Loss Limit?</span>
-                        <p class="mt-0.5">This hardened tracker enforces a <strong>$1,000 Daily Loss Limit</strong>. Lose that much in one trading day and the run is blown and resets to Stage 1.</p>
+                        <span class="font-bold text-amber-800">What does DLL OFF mean?</span>
+                        <p class="mt-0.5">There is <strong>no Daily Loss Limit</strong> kick-out rule! You only need to protect your EOD trailing balance from dropping below the safety floor.</p>
                     </div>
                     <div class="bg-white/80 p-2.5 rounded-xl border border-butter-200">
                         <span class="font-bold text-amber-800">What is EOD Trailing Drawdown?</span>
@@ -616,7 +616,7 @@
                         <div class="text-xs text-slate-500 font-bold">RECOMMENDED POSITION SIZE</div>
                         <div class="text-3xl font-extrabold text-emerald-700 flex items-center justify-center gap-2">
                             <span id="calcResultMicros" data-testid="calc-result-micros">4</span>
-                            <span class="text-sm font-bold text-slate-600">Micros</span>
+                            <span id="calcResultMicrosLabel" class="text-sm font-bold text-slate-600">Micros</span>
                         </div>
                         <div class="text-xs font-bold text-indigo-700 mt-1" id="calcResultMinis">Or 0 Full Minis</div>
                         <div id="calcResultUnits" data-testid="calc-result-units" class="text-[11px] text-slate-500"></div>
@@ -629,7 +629,7 @@
                             <span id="calcResultPoints" class="font-bold text-slate-800">10.00 pts (40 ticks)</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-stone-100">
-                            <span class="text-slate-500">Risk Per 1 Micro Contract:</span>
+                            <span id="calcRiskPerMicroLabel" class="text-slate-500">Risk Per 1 Micro Contract:</span>
                             <span id="calcResultRiskPerMicro" class="font-bold text-slate-800">$50.00 USD</span>
                         </div>
                         <div class="flex justify-between py-1.5 border-b border-stone-100">
@@ -702,7 +702,6 @@
                 <h3 class="font-bold text-slate-800 text-sm tracking-wider">HARD RULES (AUTO-ENFORCED)</h3>
                 <ul class="text-xs text-slate-700 space-y-1.5 list-disc pl-5">
                     <li>EOD trailing drawdown: balance at or below the safety floor.</li>
-                    <li>Daily loss limit: losing <span id="rulesDllText">$1,000</span> or more in one trading day.</li>
                     <li>Consistency: reaching the $53K target while your best day is over 50% of profit.</li>
                     <li>Position size: any trade over the current stage cap (no grace, 1 micro over = blown).</li>
                 </ul>
@@ -1056,7 +1055,6 @@
             exchangeRate: 1.70,
             settings: {
                 startingBalance: 50000.00,
-                dailyLossLimit: 1000.00,
                 // Unit conversion table (source of truth for Calculator + Journal). Rules use micros/minis only.
                 assets: {
                     MGC: { name: 'Micro Gold', mini: 'GC', tickSize: 0.10, tickVal: 1.00, unitsPerMicro: 10, unit: 'oz', cfd: 'XAUUSD' },
@@ -1093,7 +1091,7 @@
         const baseDictionaryTerms = [
             { term: 'EOD Trailing Drawdown', category: 'LUCID', icon: '<i data-lucide="shield" class="lf-ic"></i>', simple: 'A moving safety floor calculated at the end of each day.', why: 'It locks at $50,100 once your balance touches $52,100.', example: 'If balance is $51,000, floor is $49,000.' },
             { term: '50% Consistency Rule', category: 'LUCID', icon: '<i data-lucide="target" class="lf-ic"></i>', simple: 'Your single biggest day cannot make up over half your total profit.', why: 'Ensures safe, steady risk management rather than lucky gambling.', example: 'To pass with a $1,800 best day, you need at least $3,600 total profit.' },
-            { term: 'DLL (Daily Loss Limit)', category: 'LUCID', icon: '<i data-lucide="zap" class="lf-ic"></i>', simple: 'A rule that auto-fails an account if daily losses exceed a cap.', why: 'This hardened tracker enforces a $1,000 DLL. Breach it and the run is archived as failed and resets to Stage 1.', example: 'Down -$1,050 on Tuesday = account blown, back to Stage 1.' },
+            { term: 'DLL (Daily Loss Limit)', category: 'LUCID', icon: '<i data-lucide="zap" class="lf-ic"></i>', simple: 'A rule that auto-fails an account if daily losses exceed a cap.', why: 'LucidFlex $50K has DLL OFF, meaning no daily limit kickouts!', example: 'You only worry about the EOD safety floor.' },
             { term: 'Micro Contract (MES / MNQ)', category: 'FUTURES', icon: '<i data-lucide="chart-column" class="lf-ic"></i>', simple: '1/10th the size of a standard mini contract.', why: 'Allows precise risk sizing ($1.25 or $0.50 per tick).', example: '10 MES micros = 1 ES mini contract.' },
             { term: 'Tick', category: 'FUTURES', icon: '<i data-lucide="ruler" class="lf-ic"></i>', simple: 'The smallest price movement possible in a futures market.', why: 'MES ticks move in 0.25 increments worth $1.25 per micro.', example: 'Moving 4 ticks equals 1 full price point.' },
             { term: 'Qualifying Green Day', category: 'LUCID', icon: '<i data-lucide="leaf" class="lf-ic"></i>', simple: 'A day where your net trading profit is +$150 USD or more.', why: 'You need 5 Green Days to pass Evaluation and request payouts.', example: '+$180 is a green day; +$120 does not count toward the 5.' },
@@ -1395,7 +1393,6 @@
             const days = [...new Set([...T.map(t => t.date), ...P.map(p => p.date)])].sort();
             const dayPnl = {};
             T.forEach(t => dayPnl[t.date] = (dayPnl[t.date] || 0) + t.pnl);
-            const dll = appState.settings.dailyLossLimit;
 
             const R = { phase: 'EVAL', balance: 50000, hwm: 50000, eodThreshold: 48000, greens: [], payN: 0,
                         evalDays: {}, passDate: null, endDate: null, ignored: new Set(), tradePhase: {}, paidUsd: 0,
@@ -1414,7 +1411,6 @@
                     const worst = Math.max(...dt.map(t => t.contracts || 0));
                     dt.forEach(t => R.tradePhase[t.id] = R.phase);
                     if (worst > cap) R.reasons.push(`position size overrun (${worst} micros vs ${cap}-micro ${R.phase === 'EVAL' ? 'Evaluation' : 'Funded'} cap)`);
-                    if (n <= -dll) R.reasons.push(`daily loss limit breached (${usd(n)} on ${fmtD(d)}, limit ${usd(dll)})`);
                     R.balance += n;
                     if (R.phase === 'EVAL') R.evalDays[d] = n;
                     else if (n >= 150) R.greens.push(d);
@@ -1493,9 +1489,6 @@
 
             document.getElementById('headerRunNum').innerText = run.runNum;
             document.getElementById('headerFxRate').innerText = appState.exchangeRate.toFixed(2);
-            const dllTxt = usd(appState.settings.dailyLossLimit).replace('.00', '');
-            document.getElementById('headerDllBadge').innerText = 'DLL ' + dllTxt;
-            document.getElementById('rulesDllText').innerText = dllTxt;
             renderBanners();
             renderDictPills();
             document.getElementById('beginnerToggleText').innerText = appState.beginnerMode ? 'ON' : 'OFF';
@@ -1620,8 +1613,7 @@
             const pnl = parseFloat(document.getElementById('tradePnLUsd').value) || 0;
             const existing = (appState.activeRun.trades || []).filter(t => t.date === d).reduce((a, t) => a + t.pnl, 0);
             const total = existing + pnl;
-            const dll = appState.settings.dailyLossLimit;
-            el.innerHTML = `${fmtD(d)} total with this trade: <strong class="${total >= 0 ? 'text-emerald-700' : 'text-rose-600'}">${usd(total)}</strong>${total >= 150 ? ' <i data-lucide="leaf" class="lf-ic"></i> green day' : ''}${total <= -dll ? ` <strong class="text-rose-500"><i data-lucide="triangle-alert" class="lf-ic"></i> breaches the ${usd(dll)} daily loss limit</strong>` : ''}`;
+            el.innerHTML = `${fmtD(d)} total with this trade: <strong class="${total >= 0 ? 'text-emerald-700' : 'text-rose-600'}">${usd(total)}</strong>${total >= 150 ? ' <i data-lucide="leaf" class="lf-ic"></i> green day' : ''}`;
         }
 
         function openLogTradeModal() {
@@ -1917,9 +1909,11 @@
             const totalActualRisk = cappedMicros * riskPerMicro;
 
             const cfdU = n => specs.unitsPerMicro ? ` or ${(n * specs.unitsPerMicro).toLocaleString('en-US')} ${specs.cfd} units` : '';
-            document.getElementById('calcCurrentCapBadge').innerText = `${m.maxMicros} Micros / ${m.maxMinis} Minis${cfdU(m.maxMicros)}`;
+            document.getElementById('calcCurrentCapBadge').innerText = `${m.maxMicros} Micros${cfdU(m.maxMicros)} / ${m.maxMinis} Minis${cfdU(m.maxMicros)}`;
             document.getElementById('calcCapUnits').innerText = `Cap in units: ${unitsText(symbol, m.maxMicros)}`;
             document.getElementById('calcResultMicros').innerText = cappedMicros;
+            document.getElementById('calcResultMicrosLabel').innerText = `Micros${cfdU(cappedMicros)}`;
+            document.getElementById('calcRiskPerMicroLabel').innerText = `Risk Per 1 Micro Contract${specs.unitsPerMicro ? ' (' + cfdU(1).slice(4) + ')' : ''}:`;
             document.getElementById('calcResultMinis').innerText = `Or max ${(cappedMicros / 10).toFixed(1)} Minis${cfdU(cappedMicros)}`;
             document.getElementById('calcResultUnits').innerText = unitsText(symbol, cappedMicros);
             document.getElementById('calcResultPoints').innerText = `${pointDiff.toFixed(2)} pts (${tickDiff.toFixed(0)} ticks)`;
@@ -1930,7 +1924,7 @@
                 const f = n => (n * a.unitsPerMicro).toLocaleString('en-US');
                 return `<tr class="hover:bg-stone-50" data-testid="conv-row-${k}"><td class="p-3 font-bold">${a.name.replace('Micro ', '')} (${k})</td><td class="p-3 num">${f(1)} ${a.unit}</td><td class="p-3 num">${f(20)} ${a.cfd} units</td><td class="p-3 num">${f(40)} units</td></tr>`;
             }).join('');
-            document.getElementById('calcRecommendationBox').innerText = `Plain English Advice: Trading ${cappedMicros} Micro contract(s) on ${symbol} (${unitsText(symbol, cappedMicros)}) with a ${pointDiff.toFixed(2)} pt stop loss risks exactly $${totalActualRisk.toFixed(2)} USD.`;
+            document.getElementById('calcRecommendationBox').innerText = `Plain English Advice: Trading ${cappedMicros} Micro contract(s)${cfdU(cappedMicros)} on ${symbol} (${(cappedMicros / 10).toFixed(1)} Minis${cfdU(cappedMicros)}) with a ${pointDiff.toFixed(2)} pt stop loss risks exactly $${totalActualRisk.toFixed(2)} USD.`;
         }
 
         
